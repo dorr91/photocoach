@@ -14,6 +14,18 @@
 		B37349652EEF17CF00404689 /* PhotoCoachTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37349642EEF17CF00404689 /* PhotoCoachTests.swift */; };
 		B373496F2EEF17CF00404689 /* PhotoCoachUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B373496E2EEF17CF00404689 /* PhotoCoachUITests.swift */; };
 		B37349712EEF17CF00404689 /* PhotoCoachUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37349702EEF17CF00404689 /* PhotoCoachUITestsLaunchTests.swift */; };
+		C1000001AAAA000000000001 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000002AAAA000000000001 /* CameraManager.swift */; };
+		C1000001AAAA000000000002 /* CameraPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000002AAAA000000000002 /* CameraPreview.swift */; };
+		C1000001AAAA000000000003 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000002AAAA000000000003 /* CameraView.swift */; };
+		C1000001AAAA000000000004 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000002AAAA000000000004 /* CoreDataStack.swift */; };
+		C1000001AAAA000000000005 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000002AAAA000000000005 /* KeychainHelper.swift */; };
+		C1000001AAAA000000000006 /* OpenAIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000002AAAA000000000006 /* OpenAIService.swift */; };
+		C1000001AAAA000000000007 /* PhotoStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000002AAAA000000000007 /* PhotoStorage.swift */; };
+		C1000001AAAA000000000008 /* FeedbackViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000002AAAA000000000008 /* FeedbackViewModel.swift */; };
+		C1000001AAAA000000000009 /* PhotoCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000002AAAA000000000009 /* PhotoCard.swift */; };
+		C1000001AAAA000000000010 /* PhotoReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000002AAAA000000000010 /* PhotoReviewView.swift */; };
+		C1000001AAAA000000000011 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000002AAAA000000000011 /* SettingsView.swift */; };
+		C1000001AAAA000000000012 /* PhotoCoach.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C1000002AAAA000000000012 /* PhotoCoach.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +56,18 @@
 		B373496A2EEF17CF00404689 /* PhotoCoachUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotoCoachUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B373496E2EEF17CF00404689 /* PhotoCoachUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCoachUITests.swift; sourceTree = "<group>"; };
 		B37349702EEF17CF00404689 /* PhotoCoachUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCoachUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		C1000002AAAA000000000001 /* CameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
+		C1000002AAAA000000000002 /* CameraPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreview.swift; sourceTree = "<group>"; };
+		C1000002AAAA000000000003 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		C1000002AAAA000000000004 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		C1000002AAAA000000000005 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
+		C1000002AAAA000000000006 /* OpenAIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIService.swift; sourceTree = "<group>"; };
+		C1000002AAAA000000000007 /* PhotoStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoStorage.swift; sourceTree = "<group>"; };
+		C1000002AAAA000000000008 /* FeedbackViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewModel.swift; sourceTree = "<group>"; };
+		C1000002AAAA000000000009 /* PhotoCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCard.swift; sourceTree = "<group>"; };
+		C1000002AAAA000000000010 /* PhotoReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoReviewView.swift; sourceTree = "<group>"; };
+		C1000002AAAA000000000011 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		C1000002AAAA000000000013 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,7 +120,13 @@
 			children = (
 				B37349532EEF17CD00404689 /* PhotoCoachApp.swift */,
 				B37349552EEF17CD00404689 /* ContentView.swift */,
+				C1000003AAAA000000000001 /* Camera */,
+				C1000003AAAA000000000002 /* Services */,
+				C1000003AAAA000000000003 /* Views */,
+				C1000003AAAA000000000004 /* ViewModels */,
+				C1000003AAAA000000000005 /* Models */,
 				B37349572EEF17CF00404689 /* Assets.xcassets */,
+				C1000002AAAA000000000013 /* Info.plist */,
 				B37349592EEF17CF00404689 /* Preview Content */,
 			);
 			path = PhotoCoach;
@@ -125,6 +155,53 @@
 				B37349702EEF17CF00404689 /* PhotoCoachUITestsLaunchTests.swift */,
 			);
 			path = PhotoCoachUITests;
+			sourceTree = "<group>";
+		};
+		C1000003AAAA000000000001 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				C1000002AAAA000000000001 /* CameraManager.swift */,
+				C1000002AAAA000000000002 /* CameraPreview.swift */,
+				C1000002AAAA000000000003 /* CameraView.swift */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
+		C1000003AAAA000000000002 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				C1000002AAAA000000000004 /* CoreDataStack.swift */,
+				C1000002AAAA000000000005 /* KeychainHelper.swift */,
+				C1000002AAAA000000000006 /* OpenAIService.swift */,
+				C1000002AAAA000000000007 /* PhotoStorage.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		C1000003AAAA000000000003 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C1000002AAAA000000000009 /* PhotoCard.swift */,
+				C1000002AAAA000000000010 /* PhotoReviewView.swift */,
+				C1000002AAAA000000000011 /* SettingsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		C1000003AAAA000000000004 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				C1000002AAAA000000000008 /* FeedbackViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		C1000003AAAA000000000005 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C1000002AAAA000000000012 /* PhotoCoach.xcdatamodeld */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,6 +336,18 @@
 			files = (
 				B37349562EEF17CD00404689 /* ContentView.swift in Sources */,
 				B37349542EEF17CD00404689 /* PhotoCoachApp.swift in Sources */,
+				C1000001AAAA000000000001 /* CameraManager.swift in Sources */,
+				C1000001AAAA000000000002 /* CameraPreview.swift in Sources */,
+				C1000001AAAA000000000003 /* CameraView.swift in Sources */,
+				C1000001AAAA000000000004 /* CoreDataStack.swift in Sources */,
+				C1000001AAAA000000000005 /* KeychainHelper.swift in Sources */,
+				C1000001AAAA000000000006 /* OpenAIService.swift in Sources */,
+				C1000001AAAA000000000007 /* PhotoStorage.swift in Sources */,
+				C1000001AAAA000000000008 /* FeedbackViewModel.swift in Sources */,
+				C1000001AAAA000000000009 /* PhotoCard.swift in Sources */,
+				C1000001AAAA000000000010 /* PhotoReviewView.swift in Sources */,
+				C1000001AAAA000000000011 /* SettingsView.swift in Sources */,
+				C1000001AAAA000000000012 /* PhotoCoach.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,6 +513,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"PhotoCoach/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PhotoCoach/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "PhotoCoach needs camera access to capture photos for AI coaching feedback.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -452,6 +543,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"PhotoCoach/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PhotoCoach/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "PhotoCoach needs camera access to capture photos for AI coaching feedback.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -582,6 +675,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		C1000002AAAA000000000012 /* PhotoCoach.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				C1000002AAAA000000000014 /* PhotoCoach.xcdatamodel */,
+			);
+			currentVersion = C1000002AAAA000000000014 /* PhotoCoach.xcdatamodel */;
+			path = PhotoCoach.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		C1000002AAAA000000000014 /* PhotoCoach.xcdatamodel */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.xcdatamodel;
+			path = PhotoCoach.xcdatamodel;
+			sourceTree = "<group>";
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = B37349482EEF17CD00404689 /* Project object */;
 }

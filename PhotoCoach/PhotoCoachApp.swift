@@ -1,17 +1,13 @@
-//
-//  PhotoCoachApp.swift
-//  PhotoCoach
-//
-//  Created by David Orr on 12/14/25.
-//
-
 import SwiftUI
 
 @main
 struct PhotoCoachApp: App {
+    @StateObject private var coreData = CoreDataStack.shared
+
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(coreData)
         }
     }
 }
