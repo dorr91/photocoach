@@ -1,0 +1,587 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B37349542EEF17CD00404689 /* PhotoCoachApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37349532EEF17CD00404689 /* PhotoCoachApp.swift */; };
+		B37349562EEF17CD00404689 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37349552EEF17CD00404689 /* ContentView.swift */; };
+		B37349582EEF17CF00404689 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B37349572EEF17CF00404689 /* Assets.xcassets */; };
+		B373495B2EEF17CF00404689 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B373495A2EEF17CF00404689 /* Preview Assets.xcassets */; };
+		B37349652EEF17CF00404689 /* PhotoCoachTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37349642EEF17CF00404689 /* PhotoCoachTests.swift */; };
+		B373496F2EEF17CF00404689 /* PhotoCoachUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B373496E2EEF17CF00404689 /* PhotoCoachUITests.swift */; };
+		B37349712EEF17CF00404689 /* PhotoCoachUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37349702EEF17CF00404689 /* PhotoCoachUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B37349612EEF17CF00404689 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B37349482EEF17CD00404689 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B373494F2EEF17CD00404689;
+			remoteInfo = PhotoCoach;
+		};
+		B373496B2EEF17CF00404689 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B37349482EEF17CD00404689 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B373494F2EEF17CD00404689;
+			remoteInfo = PhotoCoach;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		B37349502EEF17CD00404689 /* PhotoCoach.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoCoach.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B37349532EEF17CD00404689 /* PhotoCoachApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCoachApp.swift; sourceTree = "<group>"; };
+		B37349552EEF17CD00404689 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B37349572EEF17CF00404689 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B373495A2EEF17CF00404689 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B37349602EEF17CF00404689 /* PhotoCoachTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotoCoachTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B37349642EEF17CF00404689 /* PhotoCoachTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCoachTests.swift; sourceTree = "<group>"; };
+		B373496A2EEF17CF00404689 /* PhotoCoachUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotoCoachUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B373496E2EEF17CF00404689 /* PhotoCoachUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCoachUITests.swift; sourceTree = "<group>"; };
+		B37349702EEF17CF00404689 /* PhotoCoachUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCoachUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B373494D2EEF17CD00404689 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B373495D2EEF17CF00404689 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B37349672EEF17CF00404689 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B37349472EEF17CD00404689 = {
+			isa = PBXGroup;
+			children = (
+				B37349522EEF17CD00404689 /* PhotoCoach */,
+				B37349632EEF17CF00404689 /* PhotoCoachTests */,
+				B373496D2EEF17CF00404689 /* PhotoCoachUITests */,
+				B37349512EEF17CD00404689 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B37349512EEF17CD00404689 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B37349502EEF17CD00404689 /* PhotoCoach.app */,
+				B37349602EEF17CF00404689 /* PhotoCoachTests.xctest */,
+				B373496A2EEF17CF00404689 /* PhotoCoachUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B37349522EEF17CD00404689 /* PhotoCoach */ = {
+			isa = PBXGroup;
+			children = (
+				B37349532EEF17CD00404689 /* PhotoCoachApp.swift */,
+				B37349552EEF17CD00404689 /* ContentView.swift */,
+				B37349572EEF17CF00404689 /* Assets.xcassets */,
+				B37349592EEF17CF00404689 /* Preview Content */,
+			);
+			path = PhotoCoach;
+			sourceTree = "<group>";
+		};
+		B37349592EEF17CF00404689 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				B373495A2EEF17CF00404689 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		B37349632EEF17CF00404689 /* PhotoCoachTests */ = {
+			isa = PBXGroup;
+			children = (
+				B37349642EEF17CF00404689 /* PhotoCoachTests.swift */,
+			);
+			path = PhotoCoachTests;
+			sourceTree = "<group>";
+		};
+		B373496D2EEF17CF00404689 /* PhotoCoachUITests */ = {
+			isa = PBXGroup;
+			children = (
+				B373496E2EEF17CF00404689 /* PhotoCoachUITests.swift */,
+				B37349702EEF17CF00404689 /* PhotoCoachUITestsLaunchTests.swift */,
+			);
+			path = PhotoCoachUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B373494F2EEF17CD00404689 /* PhotoCoach */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B37349742EEF17CF00404689 /* Build configuration list for PBXNativeTarget "PhotoCoach" */;
+			buildPhases = (
+				B373494C2EEF17CD00404689 /* Sources */,
+				B373494D2EEF17CD00404689 /* Frameworks */,
+				B373494E2EEF17CD00404689 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PhotoCoach;
+			productName = PhotoCoach;
+			productReference = B37349502EEF17CD00404689 /* PhotoCoach.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B373495F2EEF17CF00404689 /* PhotoCoachTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B37349772EEF17CF00404689 /* Build configuration list for PBXNativeTarget "PhotoCoachTests" */;
+			buildPhases = (
+				B373495C2EEF17CF00404689 /* Sources */,
+				B373495D2EEF17CF00404689 /* Frameworks */,
+				B373495E2EEF17CF00404689 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B37349622EEF17CF00404689 /* PBXTargetDependency */,
+			);
+			name = PhotoCoachTests;
+			productName = PhotoCoachTests;
+			productReference = B37349602EEF17CF00404689 /* PhotoCoachTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B37349692EEF17CF00404689 /* PhotoCoachUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B373497A2EEF17CF00404689 /* Build configuration list for PBXNativeTarget "PhotoCoachUITests" */;
+			buildPhases = (
+				B37349662EEF17CF00404689 /* Sources */,
+				B37349672EEF17CF00404689 /* Frameworks */,
+				B37349682EEF17CF00404689 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B373496C2EEF17CF00404689 /* PBXTargetDependency */,
+			);
+			name = PhotoCoachUITests;
+			productName = PhotoCoachUITests;
+			productReference = B373496A2EEF17CF00404689 /* PhotoCoachUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B37349482EEF17CD00404689 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1520;
+				LastUpgradeCheck = 1520;
+				TargetAttributes = {
+					B373494F2EEF17CD00404689 = {
+						CreatedOnToolsVersion = 15.2;
+					};
+					B373495F2EEF17CF00404689 = {
+						CreatedOnToolsVersion = 15.2;
+						TestTargetID = B373494F2EEF17CD00404689;
+					};
+					B37349692EEF17CF00404689 = {
+						CreatedOnToolsVersion = 15.2;
+						TestTargetID = B373494F2EEF17CD00404689;
+					};
+				};
+			};
+			buildConfigurationList = B373494B2EEF17CD00404689 /* Build configuration list for PBXProject "PhotoCoach" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B37349472EEF17CD00404689;
+			productRefGroup = B37349512EEF17CD00404689 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B373494F2EEF17CD00404689 /* PhotoCoach */,
+				B373495F2EEF17CF00404689 /* PhotoCoachTests */,
+				B37349692EEF17CF00404689 /* PhotoCoachUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B373494E2EEF17CD00404689 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B373495B2EEF17CF00404689 /* Preview Assets.xcassets in Resources */,
+				B37349582EEF17CF00404689 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B373495E2EEF17CF00404689 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B37349682EEF17CF00404689 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B373494C2EEF17CD00404689 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B37349562EEF17CD00404689 /* ContentView.swift in Sources */,
+				B37349542EEF17CD00404689 /* PhotoCoachApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B373495C2EEF17CF00404689 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B37349652EEF17CF00404689 /* PhotoCoachTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B37349662EEF17CF00404689 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B37349712EEF17CF00404689 /* PhotoCoachUITestsLaunchTests.swift in Sources */,
+				B373496F2EEF17CF00404689 /* PhotoCoachUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B37349622EEF17CF00404689 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B373494F2EEF17CD00404689 /* PhotoCoach */;
+			targetProxy = B37349612EEF17CF00404689 /* PBXContainerItemProxy */;
+		};
+		B373496C2EEF17CF00404689 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B373494F2EEF17CD00404689 /* PhotoCoach */;
+			targetProxy = B373496B2EEF17CF00404689 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		B37349722EEF17CF00404689 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		B37349732EEF17CF00404689 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B37349752EEF17CF00404689 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"PhotoCoach/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = DaveDev.PhotoCoach;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B37349762EEF17CF00404689 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"PhotoCoach/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = DaveDev.PhotoCoach;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		B37349782EEF17CF00404689 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = DaveDev.PhotoCoachTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PhotoCoach.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PhotoCoach";
+			};
+			name = Debug;
+		};
+		B37349792EEF17CF00404689 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = DaveDev.PhotoCoachTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PhotoCoach.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PhotoCoach";
+			};
+			name = Release;
+		};
+		B373497B2EEF17CF00404689 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = DaveDev.PhotoCoachUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = PhotoCoach;
+			};
+			name = Debug;
+		};
+		B373497C2EEF17CF00404689 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = DaveDev.PhotoCoachUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = PhotoCoach;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B373494B2EEF17CD00404689 /* Build configuration list for PBXProject "PhotoCoach" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B37349722EEF17CF00404689 /* Debug */,
+				B37349732EEF17CF00404689 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B37349742EEF17CF00404689 /* Build configuration list for PBXNativeTarget "PhotoCoach" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B37349752EEF17CF00404689 /* Debug */,
+				B37349762EEF17CF00404689 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B37349772EEF17CF00404689 /* Build configuration list for PBXNativeTarget "PhotoCoachTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B37349782EEF17CF00404689 /* Debug */,
+				B37349792EEF17CF00404689 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B373497A2EEF17CF00404689 /* Build configuration list for PBXNativeTarget "PhotoCoachUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B373497B2EEF17CF00404689 /* Debug */,
+				B373497C2EEF17CF00404689 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B37349482EEF17CD00404689 /* Project object */;
+}
