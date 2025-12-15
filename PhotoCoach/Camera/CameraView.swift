@@ -113,8 +113,14 @@ struct CameraView: View {
             await cameraManager.checkPermission()
             loadLastThumbnail()
         }
+        .onAppear {
+            AppDelegate.orientationLock = .portrait
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                windowScene.requestGeometryUpdate(.iOS(interfaceOrientations: .portrait))
+            }
+        }
         .onDisappear {
-            // Don't stop session - we want it running when we come back
+            AppDelegate.orientationLock = .allButUpsideDown
         }
     }
 

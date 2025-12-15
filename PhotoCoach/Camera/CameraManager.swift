@@ -37,6 +37,9 @@ class CameraManager: NSObject, ObservableObject {
     }
 
     private func setupSession() async {
+        // Enable device orientation tracking even though UI is locked to portrait
+        UIDevice.current.beginGeneratingDeviceOrientationNotifications()
+
         session.beginConfiguration()
         session.sessionPreset = .photo
 
@@ -80,6 +83,11 @@ class CameraManager: NSObject, ObservableObject {
         let settings = AVCapturePhotoSettings()
         settings.maxPhotoDimensions = photoOutput.maxPhotoDimensions
 
+        // Set orientation based on current physical device orientation
+        if let connection = photoOutput.connection(with: .video) {
+            connection.videoRotationAngle = videoRotationAngle
+        }
+
         return await withCheckedContinuation { continuation in
             self.photoContinuation = continuation
             photoOutput.capturePhoto(with: settings, delegate: self)
@@ -87,11 +95,22 @@ class CameraManager: NSObject, ObservableObject {
     }
 
     func stopSession() {
+        UIDevice.current.endGeneratingDeviceOrientationNotifications()
+
         let captureSession = session
         Task.detached {
             captureSession.stopRunning()
         }
         isSessionRunning = false
+    }
+
+    private var videoRotationAngle: CGFloat {
+        switch UIDevice.current.orientation {
+        case .landscapeLeft: return 0      // Home button on right
+        case .landscapeRight: return 180   // Home button on left
+        case .portraitUpsideDown: return 270
+        default: return 90                 // Portrait (home button at bottom)
+        }
     }
 }
 

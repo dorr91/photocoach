@@ -36,6 +36,7 @@ An AI-powered photo coaching app for iOS. Take a photo → get instant feedback 
 ```
 PhotoCoach/
 ├── PhotoCoachApp.swift          # App entry point, injects CoreDataStack
+├── AppDelegate.swift            # UIApplicationDelegate for orientation control
 ├── ContentView.swift            # Navigation container (NavigationStack)
 │
 ├── Camera/                      # Camera feature
@@ -73,7 +74,7 @@ The camera requires AVFoundation (UIKit), so we bridge it to SwiftUI:
 |------|---------|
 | `CameraManager` | `@MainActor ObservableObject` that manages AVCaptureSession, handles permissions, captures photos |
 | `CameraPreview` | `UIViewRepresentable` that wraps AVCaptureVideoPreviewLayer for the live preview |
-| `CameraView` | SwiftUI view with shutter button, last photo thumbnail, settings gear |
+| `CameraView` | SwiftUI view with shutter button, last photo thumbnail, settings gear. Locked to portrait orientation (like Apple Camera). |
 
 ### Data Flow
 
