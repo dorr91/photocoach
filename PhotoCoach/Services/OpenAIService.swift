@@ -21,15 +21,25 @@ enum OpenAIError: Error, LocalizedError {
 }
 
 actor OpenAIService {
-    private let baseURL = "https://api.openai.com/v1/chat/completions"
+    static let shared = OpenAIService()
 
-    private let systemPrompt = """
+    private let baseURL = "https://api.openai.com/v1/responses"
+
+    private let instructions = """
     You are a photography teacher coaching a beginning photographer to improve their skills. Use a direct, technical tone to give feedback. Analyze the photo and provide actionable feedback.
 
     The student is taking photos on their phone, so focus on things they can control, like composition, lighting, and subject. Note phones control focus, exposure and white balance automatically.
 
-    Be concise and specific in your feedback. Start with what works well, then give 2-3 specific improvements. Use plain language, not jargon. Keep response under 150 words.
+    Be concise and specific in your feedback. Start with what works well, then give 2-3 specific improvements. Use plain language, not jargon. Keep response under 250 words.
+    If themes show up across multiple photos in a session, feel free to call them out.
     """
+
+    // Store the last response ID for conversation continuity
+    private var previousResponseId: String?
+
+    func clearSession() {
+        previousResponseId = nil
+    }
 
     func streamFeedback(imageData: Data) -> AsyncThrowingStream<String, Error> {
         AsyncThrowingStream { continuation in
@@ -41,34 +51,38 @@ actor OpenAIService {
 
                     let base64Image = imageData.base64EncodedString()
 
-                    let requestBody: [String: Any] = [
-                        "model": "gpt-4o",
-                        "messages": [
-                            [
-                                "role": "system",
-                                "content": systemPrompt
-                            ],
-                            [
-                                "role": "user",
-                                "content": [
-                                    [
-                                        "type": "text",
-                                        "text": "Please analyze this photo and provide coaching feedback."
-                                    ],
-                                    [
-                                        "type": "image_url",
-                                        "image_url": [
-                                            "url": "data:image/jpeg;base64,\(base64Image)"
-                                        ]
-                                    ]
+                    // Build input with image
+                    let input: [[String: Any]] = [
+                        [
+                            "role": "user",
+                            "content": [
+                                [
+                                    "type": "input_text",
+                                    "text": "Please analyze this photo and provide coaching feedback."
+                                ],
+                                [
+                                    "type": "input_image",
+                                    "image_url": "data:image/jpeg;base64,\(base64Image)"
                                 ]
                             ]
-                        ],
-                        "max_tokens": 500,
+                        ]
+                    ]
+
+                    var requestBody: [String: Any] = [
+                        "model": "gpt-4o",
+                        "instructions": self.instructions,
+                        "input": input,
+                        "max_output_tokens": 500,
+                        "store": true,
                         "stream": true
                     ]
 
-                    var request = URLRequest(url: URL(string: baseURL)!)
+                    // Chain to previous response if we have one
+                    if let prevId = self.previousResponseId {
+                        requestBody["previous_response_id"] = prevId
+                    }
+
+                    var request = URLRequest(url: URL(string: self.baseURL)!)
                     request.httpMethod = "POST"
                     request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
                     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -88,6 +102,8 @@ actor OpenAIService {
                         throw OpenAIError.apiError("API error (\(httpResponse.statusCode)): \(errorBody)")
                     }
 
+                    var capturedResponseId: String?
+
                     for try await line in bytes.lines {
                         guard line.hasPrefix("data: ") else { continue }
                         let jsonString = String(line.dropFirst(6))
@@ -97,15 +113,35 @@ actor OpenAIService {
                         }
 
                         guard let data = jsonString.data(using: .utf8),
-                              let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-                              let choices = json["choices"] as? [[String: Any]],
-                              let firstChoice = choices.first,
-                              let delta = firstChoice["delta"] as? [String: Any],
-                              let content = delta["content"] as? String else {
+                              let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else {
                             continue
                         }
 
-                        continuation.yield(content)
+                        // Capture the response ID from the first event
+                        if capturedResponseId == nil, let responseId = json["id"] as? String {
+                            capturedResponseId = responseId
+                        }
+
+                        // Extract text delta from streaming response
+                        if let delta = json["delta"] as? String {
+                            continuation.yield(delta)
+                        } else if let output = json["output"] as? [[String: Any]] {
+                            // Handle output array format
+                            for item in output {
+                                if let content = item["content"] as? [[String: Any]] {
+                                    for contentItem in content {
+                                        if let text = contentItem["text"] as? String {
+                                            continuation.yield(text)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    // Store the response ID for next call
+                    if let responseId = capturedResponseId {
+                        self.previousResponseId = responseId
                     }
 
                     continuation.finish()

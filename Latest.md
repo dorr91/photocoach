@@ -72,9 +72,9 @@ The camera requires AVFoundation (UIKit), so we bridge it to SwiftUI:
 
 | File | Purpose |
 |------|---------|
-| `CameraManager` | `@MainActor ObservableObject` that manages AVCaptureSession, handles permissions, captures photos |
+| `CameraManager` | `@MainActor ObservableObject` that manages AVCaptureSession, handles permissions, captures photos. Tracks device orientation via `UIDevice` notifications and sets `videoRotationAngle` on capture for correct landscape/portrait photos. |
 | `CameraPreview` | `UIViewRepresentable` that wraps AVCaptureVideoPreviewLayer for the live preview |
-| `CameraView` | SwiftUI view with shutter button, last photo thumbnail, settings gear. Locked to portrait orientation (like Apple Camera). |
+| `CameraView` | SwiftUI view with shutter button, last photo thumbnail, settings gear. UI locked to portrait, but photos capture in correct orientation based on device rotation. |
 
 ### Data Flow
 
@@ -117,13 +117,16 @@ CoreDataStack.updateFeedback() → Saves complete feedback
 
 ### AI Integration
 
-`OpenAIService` sends images to GPT-4 Vision and streams the response:
+`OpenAIService` (singleton) uses the OpenAI Responses API with session continuity:
 
 1. Image resized to max 1024px and converted to base64
-2. POST to `/v1/chat/completions` with `stream: true`
-3. Parse SSE chunks, yield text via `AsyncThrowingStream`
-4. `FeedbackViewModel` accumulates chunks and updates `@Published` state
-5. SwiftUI automatically re-renders as text streams in
+2. POST to `/v1/responses` with `stream: true` and `store: true`
+3. On subsequent photos, `previous_response_id` chains to prior response (OpenAI remembers context server-side)
+4. Parse SSE chunks, yield text via `AsyncThrowingStream`
+5. `FeedbackViewModel` accumulates chunks and updates `@Published` state
+6. SwiftUI automatically re-renders as text streams in
+
+This allows the AI coach to reference patterns across multiple photos in a session without re-sending previous images.
 
 ### Error Handling
 

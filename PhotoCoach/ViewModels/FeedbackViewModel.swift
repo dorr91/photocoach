@@ -13,7 +13,6 @@ enum FeedbackState {
 class FeedbackViewModel: ObservableObject {
     @Published var state: FeedbackState = .idle
 
-    private let openAIService = OpenAIService()
     private let coreData: CoreDataStack
 
     init(coreData: CoreDataStack) {
@@ -80,7 +79,7 @@ class FeedbackViewModel: ObservableObject {
         var accumulatedText = ""
 
         do {
-            let stream = await openAIService.streamFeedback(imageData: imageData)
+            let stream = await OpenAIService.shared.streamFeedback(imageData: imageData)
 
             for try await chunk in stream {
                 accumulatedText += chunk
