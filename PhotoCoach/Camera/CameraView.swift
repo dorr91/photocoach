@@ -8,6 +8,7 @@ struct CameraView: View {
 
     @State private var lastThumbnail: UIImage?
     @State private var showCaptureFlash = false
+    @AppStorage("showGrid") private var showGrid = false
 
     var body: some View {
         ZStack {
@@ -26,6 +27,12 @@ struct CameraView: View {
                     }
             }
 
+            // Grid overlay
+            if showGrid && cameraManager.permissionGranted {
+                GridOverlay()
+                    .ignoresSafeArea()
+            }
+            
             // Capture flash overlay
             if showCaptureFlash {
                 Color.white
@@ -38,6 +45,18 @@ struct CameraView: View {
                 // Top bar with settings
                 HStack {
                     Spacer()
+                    
+                    Button {
+                        showGrid.toggle()
+                    } label: {
+                        Image(systemName: "grid")
+                            .font(.title2)
+                            .foregroundStyle(.white)
+                            .padding(12)
+                            .background(.ultraThinMaterial, in: Circle())
+                            .opacity(showGrid ? 1.0 : 0.6)
+                    }
+                    
                     Button {
                         showSettings = true
                     } label: {
