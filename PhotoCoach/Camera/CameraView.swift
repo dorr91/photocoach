@@ -53,8 +53,8 @@ struct CameraView: View {
                             .font(.title2)
                             .foregroundStyle(.white)
                             .padding(12)
+                            .background(showGrid ? Color.blue : Color.clear, in: Circle())
                             .background(.ultraThinMaterial, in: Circle())
-                            .opacity(showGrid ? 1.0 : 0.6)
                     }
                     
                     Button {
