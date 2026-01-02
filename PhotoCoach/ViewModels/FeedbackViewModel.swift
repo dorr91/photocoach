@@ -73,13 +73,22 @@ class FeedbackViewModel: ObservableObject {
             return
         }
 
-        guard let imagePath = photo.imagePath,
-              let imageData = photoStorage.imageDataForAPI(path: imagePath, maxDimension: 1024) else {
+        guard let imagePath = photo.imagePath else {
             state = .error("Could not load photo.")
             return
         }
 
         state = .loading
+
+        // Load and resize image off main thread
+        let imageData = await Task.detached(priority: .userInitiated) {
+            self.photoStorage.imageDataForAPI(path: imagePath, maxDimension: 1024)
+        }.value
+
+        guard let imageData else {
+            state = .error("Could not load photo.")
+            return
+        }
         var accumulatedText = ""
         var lastUpdateTime = Date()
         let updateInterval: TimeInterval = 0.1  // Update UI at most every 100ms
