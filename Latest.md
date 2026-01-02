@@ -1,8 +1,39 @@
 # PhotoCoach - Architecture Overview
 
+**Last updated**: Commit `04d38e9` (2026-01-02)
+
 ## What We Built
 
 An AI-powered photo coaching app for iOS. Take a photo → get instant feedback on composition, lighting, and subject from GPT-4 Vision.
+
+## Recent Changes
+
+### Single-Photo Detail View with Persistent Followups (04d38e9)
+- Added `PhotoDetailView` for viewing individual photos with their AI feedback
+- Followup conversations are now persistent — continue coaching sessions across app launches
+- Photos can be tapped from the review grid to open detailed view
+
+### Photo Library Picker (aca9c5a)
+- Added ability to import photos from the photo library (not just camera)
+- Camera view now shows a photo library button alongside the shutter
+
+### Grid Overlay (2e6505f)
+- Added a rule-of-thirds grid overlay to the camera view for composition guidance
+
+### Performance & Stability Fixes
+- **UI freezing fixed** (0c9fc49): Debounced streaming feedback updates to prevent UI lockups
+- **Main thread optimization** (b639e3b, 6938e09, ca81475): Moved image loading, resizing, and photo fetching off main thread
+- **Infinite recursion bug fixed** (d1ea59c): Fixed app freeze caused by recursive calls
+- **Swift 6 Sendable warnings** (1562e92): Fixed concurrency warnings in PhotoReviewView
+
+### AI Coaching Improvements
+- **Session continuity** (7b97a2c): Single OpenAI session so critiques can build on each other
+- **Improved prompts** (4462ed2, e353e1a): Better coaching prompts with reshoot suggestions
+- **Increased token limit** (ddaf7c1): Higher LLM token limit for more detailed feedback
+- **Portrait mode handling** (0ae4bbc): Better handling of portrait orientation photos
+
+### Architecture
+- **Testable package** (ca4109a): Moved business logic into PhotoCoachCore Swift package for fast unit tests
 
 ## Tech Stack
 
@@ -15,12 +46,13 @@ An AI-powered photo coaching app for iOS. Take a photo → get instant feedback 
 ## App Flow
 
 ```
-┌─────────────┐     tap shutter     ┌──────────────────┐
-│ CameraView  │ ──────────────────► │  PhotoReviewView │
-│             │                     │                  │
-│  [shutter]  │ ◄────── back ────── │  [photo cards]   │
-│  [settings] │                     │  [AI feedback]   │
-└─────────────┘                     └──────────────────┘
+┌─────────────┐     tap shutter     ┌──────────────────┐    tap photo    ┌─────────────────┐
+│ CameraView  │ ──────────────────► │  PhotoReviewView │ ──────────────► │ PhotoDetailView │
+│             │                     │                  │                 │                 │
+│  [shutter]  │ ◄────── back ────── │  [photo grid]    │ ◄──── back ──── │ [full feedback] │
+│  [library]  │                     │  [AI feedback]   │                 │ [followups]     │
+│  [settings] │                     └──────────────────┘                 └─────────────────┘
+└─────────────┘
        │
        │ gear icon
        ▼
@@ -68,16 +100,22 @@ PhotoCoach/
 │   ├── Camera/                  # Camera feature
 │   │   ├── CameraManager.swift
 │   │   ├── CameraPreview.swift
-│   │   └── CameraView.swift
+│   │   ├── CameraView.swift
+│   │   └── GridOverlay.swift    # Rule-of-thirds overlay
 │   ├── Views/                   # SwiftUI screens
 │   │   ├── PhotoReviewView.swift
+│   │   ├── PhotoDetailView.swift  # Single photo with persistent followups
 │   │   ├── PhotoCard.swift
 │   │   └── SettingsView.swift
 │   ├── ViewModels/
 │   │   └── FeedbackViewModel.swift
-│   └── Services/                # Legacy services (being migrated)
+│   ├── Protocols/               # Protocol abstractions (duplicated for app target)
+│   └── Services/                # App services
 │       ├── CoreDataStack.swift
 │       ├── OpenAIService.swift
+│       ├── OpenAIServiceExtensions.swift
+│       ├── KeychainService.swift
+│       ├── PhotoStorageService.swift
 │       └── ServiceContainer.swift
 │
 └── PhotoCoachTests/             # Integration tests (~30s)
@@ -190,5 +228,6 @@ This allows the AI coach to reference patterns across multiple photos in a sessi
 All views have `#Preview` blocks for Xcode Canvas:
 - `SettingsView` - Works fully
 - `PhotoReviewView` - Shows empty state
+- `PhotoDetailView` - Shows photo with feedback and followup input
 - `PhotoCard` - Shows with mock photo
 - `CameraView` - Shows permission denied state (no camera in simulator)
