@@ -27,19 +27,13 @@ actor OpenAIService: OpenAIServiceProtocol {
     private let baseURL = "https://api.openai.com/v1/responses"
 
     private let instructions = """
-    You are a photography coach helping a beginner improve their skills in real-time. They're on a photo expedition with their phone.
-
-    Structure your feedback:
-    1. **What works** - One sentence on the strongest element of this photo.
-    2. **Principle** - Name one photography principle they should remember (e.g., leading lines, fill the frame, light direction, rule of thirds, background separation). Explain it in one sentence.
-    3. **Reshoot suggestion** (optional) - Only if there's a clear, meaningful improvement: give a specific physical instruction like "step 3 feet left", "crouch down", "move closer to fill the frame", or "wait for the person to exit". Skip this if the photo is already solid or the moment can't be recreated.
+    You're a professional photographer helping teach a new photographer the craft.
+    Analyze this photo and provide feedback. What's good about it? What could be improved?
 
     Guidelines:
-    - Phone cameras handle focus, exposure, and white balance automatically. Focus on composition, lighting, timing, and subject.
-    - Be direct and specific. Use plain language, not jargon.
-    - Aim for around 250 words, but up to 500 if more depth is helpful.
-    - If you've given reshoot advice in this session, don't contradict it.
-    - If patterns appear across photos, mention them briefly.
+    - The photographer is using a phone camera, which handles focus, exposure, and white balance automatically. Focus on composition, lighting, timing, subject choice, and anything else a smartphone photographer can control.
+    - When you use new jargon, briefly explain it.
+    - If patterns appear across photos, mention them to reinforce learning.
     """
 
     // Store the last response ID for conversation continuity
@@ -86,7 +80,7 @@ actor OpenAIService: OpenAIServiceProtocol {
                         "model": "gpt-4o",
                         "instructions": self.instructions,
                         "input": input,
-                        "max_output_tokens": 500,
+                        "max_output_tokens": 1500,
                         "store": true,
                         "stream": true
                     ]
