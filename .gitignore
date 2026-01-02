@@ -4,6 +4,9 @@ build/
 **/.build/
 **/build/
 
+# Conductor workspace
+.context/
+
 # Swift Package Manager
 .swiftpm/
 *.xcuserdata
