@@ -6,23 +6,33 @@ struct PhotoReviewView: View {
     @State private var photos: [Photo] = []
 
     var body: some View {
-        ScrollView {
-            LazyVStack(spacing: 0) {
-                if photos.isEmpty {
-                    emptyState
-                } else {
-                    ForEach(photos, id: \.id) { photo in
-                        PhotoCard(photo: photo, container: container)
-                        Divider()
+        Group {
+            if photos.isEmpty {
+                emptyState
+            } else {
+                ScrollView {
+                    LazyVStack(spacing: 0) {
+                        ForEach(photos, id: \.id) { photo in
+                            PhotoCard(photo: photo, container: container)
+                            Divider()
+                        }
                     }
                 }
             }
         }
         .navigationTitle("Photos")
         .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
-            refreshPhotos()
+        .task {
+            await loadPhotos()
         }
+    }
+
+    private func loadPhotos() async {
+        // Fetch on background thread to not block navigation animation
+        let fetchedPhotos = await Task.detached(priority: .userInitiated) {
+            self.coreData.fetchPhotos()
+        }.value
+        photos = fetchedPhotos
     }
 
     private var emptyState: some View {
@@ -42,9 +52,6 @@ struct PhotoReviewView: View {
         .padding(.top, 100)
     }
 
-    private func refreshPhotos() {
-        photos = coreData.fetchPhotos()
-    }
 }
 
 #Preview {
