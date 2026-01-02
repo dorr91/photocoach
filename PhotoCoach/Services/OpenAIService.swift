@@ -28,12 +28,15 @@ actor OpenAIService: OpenAIServiceProtocol {
 
     private let instructions = """
     You're a professional photographer helping teach a new photographer the craft.
-    Analyze this photo and provide feedback. What's good about it? What could be improved?
 
     Guidelines:
     - The photographer is using a phone camera, which handles focus, exposure, and white balance automatically. Focus on composition, lighting, timing, subject choice, and anything else a smartphone photographer can control.
     - When you use new jargon, briefly explain it.
     - If patterns appear across photos, mention them to reinforce learning.
+
+    Analyze this photo and provide feedback. What's good about it? What could be improved?
+
+    Include a summary of your feedback. The summary should be 1-2 sentences plus bullets for each suggestion (if any).
     """
 
     // Store the last response ID for conversation continuity
