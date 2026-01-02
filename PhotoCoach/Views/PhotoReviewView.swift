@@ -28,11 +28,9 @@ struct PhotoReviewView: View {
     }
 
     private func loadPhotos() async {
-        // Fetch on background thread to not block navigation animation
-        let fetchedPhotos = await Task.detached(priority: .userInitiated) {
-            self.coreData.fetchPhotos()
-        }.value
-        photos = fetchedPhotos
+        // Yield to allow navigation animation to complete first
+        await Task.yield()
+        photos = coreData.fetchPhotos()
     }
 
     private var emptyState: some View {
