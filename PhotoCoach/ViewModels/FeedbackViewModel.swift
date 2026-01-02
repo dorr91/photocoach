@@ -81,13 +81,21 @@ class FeedbackViewModel: ObservableObject {
 
         state = .loading
         var accumulatedText = ""
+        var lastUpdateTime = Date()
+        let updateInterval: TimeInterval = 0.1  // Update UI at most every 100ms
 
         do {
             let stream = await openAIService.streamFeedback(imageData: imageData)
 
             for try await chunk in stream {
                 accumulatedText += chunk
-                state = .streaming(accumulatedText)
+
+                // Debounce UI updates to prevent excessive re-renders
+                let now = Date()
+                if now.timeIntervalSince(lastUpdateTime) >= updateInterval {
+                    state = .streaming(accumulatedText)
+                    lastUpdateTime = now
+                }
             }
 
             state = .complete(accumulatedText)
