@@ -20,8 +20,9 @@ enum OpenAIError: Error, LocalizedError {
     }
 }
 
-actor OpenAIService {
-    static let shared = OpenAIService()
+actor OpenAIService: OpenAIServiceProtocol {
+    private let urlSession: URLSessionProtocol
+    private let keychainService: KeychainServiceProtocol
 
     private let baseURL = "https://api.openai.com/v1/responses"
 
@@ -36,6 +37,12 @@ actor OpenAIService {
 
     // Store the last response ID for conversation continuity
     private var previousResponseId: String?
+    
+    init(urlSession: URLSessionProtocol = URLSession.shared,
+         keychainService: KeychainServiceProtocol) {
+        self.urlSession = urlSession
+        self.keychainService = keychainService
+    }
 
     func clearSession() {
         previousResponseId = nil
@@ -45,7 +52,7 @@ actor OpenAIService {
         AsyncThrowingStream { continuation in
             Task {
                 do {
-                    guard let apiKey = KeychainHelper.getAPIKey() else {
+                    guard let apiKey = self.keychainService.getAPIKey() else {
                         throw OpenAIError.noAPIKey
                     }
 
@@ -88,7 +95,7 @@ actor OpenAIService {
                     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
                     request.httpBody = try JSONSerialization.data(withJSONObject: requestBody)
 
-                    let (bytes, response) = try await URLSession.shared.bytes(for: request)
+                    let (bytes, response) = try await self.urlSession.bytes(for: request)
 
                     guard let httpResponse = response as? HTTPURLResponse else {
                         throw OpenAIError.invalidResponse

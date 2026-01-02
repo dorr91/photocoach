@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @EnvironmentObject var container: ServiceContainer
     @Environment(\.dismiss) private var dismiss
     @State private var apiKey: String = ""
     @State private var showKey = false
@@ -69,7 +70,7 @@ struct SettingsView: View {
                     }
                     .disabled(apiKey.isEmpty)
 
-                    if KeychainHelper.hasAPIKey() {
+                    if container.keychainService.hasAPIKey() {
                         Button(role: .destructive) {
                             deleteAPIKey()
                         } label: {
@@ -107,7 +108,7 @@ struct SettingsView: View {
     }
 
     private func loadExistingKey() {
-        if let existingKey = KeychainHelper.getAPIKey() {
+        if let existingKey = container.keychainService.getAPIKey() {
             apiKey = existingKey
         }
     }
@@ -120,7 +121,7 @@ struct SettingsView: View {
             return
         }
 
-        if KeychainHelper.saveAPIKey(trimmedKey) {
+        if container.keychainService.saveAPIKey(trimmedKey) {
             saveStatus = .saved
             // Reset status after delay
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
@@ -132,7 +133,7 @@ struct SettingsView: View {
     }
 
     private func deleteAPIKey() {
-        KeychainHelper.deleteAPIKey()
+        container.keychainService.deleteAPIKey()
         apiKey = ""
         saveStatus = .idle
     }

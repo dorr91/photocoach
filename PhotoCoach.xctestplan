@@ -1,0 +1,39 @@
+{
+  "configurations" : [
+    {
+      "id" : "533B2DD6-E660-4D73-9831-BC599E6DC0FE",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "performanceAntipatternCheckerEnabled" : true,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:PhotoCoach.xcodeproj",
+      "identifier" : "B373494F2EEF17CD00404689",
+      "name" : "PhotoCoach"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:PhotoCoach.xcodeproj",
+        "identifier" : "B373495F2EEF17CF00404689",
+        "name" : "PhotoCoachTests"
+      }
+    },
+    {
+      "enabled" : false,
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:PhotoCoach.xcodeproj",
+        "identifier" : "B37349692EEF17CF00404689",
+        "name" : "PhotoCoachUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

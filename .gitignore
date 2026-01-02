@@ -1,0 +1,10 @@
+# Build directories
+build/
+.build/
+**/.build/
+**/build/
+
+# Swift Package Manager
+.swiftpm/
+*.xcuserdata
+DerivedData/

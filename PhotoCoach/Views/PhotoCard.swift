@@ -2,12 +2,18 @@ import SwiftUI
 
 struct PhotoCard: View {
     let photo: Photo
+    let container: ServiceContainer
     @StateObject private var feedbackVM: FeedbackViewModel
     @State private var image: UIImage?
 
-    init(photo: Photo, coreData: CoreDataStack) {
+    init(photo: Photo, container: ServiceContainer) {
         self.photo = photo
-        self._feedbackVM = StateObject(wrappedValue: FeedbackViewModel(coreData: coreData))
+        self.container = container
+        self._feedbackVM = StateObject(wrappedValue: FeedbackViewModel(
+            coreData: container.coreDataStack,
+            openAIService: container.openAIService,
+            photoStorage: container.photoStorage
+        ))
     }
 
     var body: some View {
@@ -100,13 +106,14 @@ struct PhotoCard: View {
 
     private func loadImage() {
         if let imagePath = photo.imagePath {
-            image = PhotoStorage.loadImage(path: imagePath)
+            image = container.photoStorage.loadImage(path: imagePath)
         }
     }
 }
 
 #Preview {
-    let coreData = CoreDataStack(inMemory: true)
+    let container = ServiceContainer(inMemory: true)
+    let coreData = container.coreDataStack as! CoreDataStack
     let photo = Photo(context: coreData.viewContext)
     photo.id = UUID()
     photo.capturedAt = Date()
@@ -114,6 +121,6 @@ struct PhotoCard: View {
     photo.thumbnailPath = "preview"
 
     return ScrollView {
-        PhotoCard(photo: photo, coreData: coreData)
+        PhotoCard(photo: photo, container: container)
     }
 }

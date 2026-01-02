@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct PhotoReviewView: View {
+    @EnvironmentObject var container: ServiceContainer
     @EnvironmentObject var coreData: CoreDataStack
     @State private var photos: [Photo] = []
 
@@ -11,7 +12,7 @@ struct PhotoReviewView: View {
                     emptyState
                 } else {
                     ForEach(photos, id: \.id) { photo in
-                        PhotoCard(photo: photo, coreData: coreData)
+                        PhotoCard(photo: photo, container: container)
                         Divider()
                     }
                 }
@@ -50,5 +51,5 @@ struct PhotoReviewView: View {
     NavigationStack {
         PhotoReviewView()
     }
-    .environmentObject(CoreDataStack(inMemory: true))
+    .environmentObject(CoreDataStack(inMemory: true, photoStorage: PhotoStorageService()))
 }

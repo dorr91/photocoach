@@ -1,11 +1,11 @@
 import Foundation
 import Security
 
-enum KeychainHelper {
-    private static let service = "com.photocoach.apikey"
-    private static let account = "openai-api-key"
+class KeychainService: KeychainServiceProtocol {
+    private let service = "com.photocoach.apikey"
+    private let account = "openai-api-key"
 
-    static func saveAPIKey(_ key: String) -> Bool {
+    func saveAPIKey(_ key: String) -> Bool {
         guard let data = key.data(using: .utf8) else { return false }
 
         // Delete existing item first
@@ -22,7 +22,7 @@ enum KeychainHelper {
         return status == errSecSuccess
     }
 
-    static func getAPIKey() -> String? {
+    func getAPIKey() -> String? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: service,
@@ -44,7 +44,7 @@ enum KeychainHelper {
     }
 
     @discardableResult
-    static func deleteAPIKey() -> Bool {
+    func deleteAPIKey() -> Bool {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: service,
@@ -55,7 +55,7 @@ enum KeychainHelper {
         return status == errSecSuccess || status == errSecItemNotFound
     }
 
-    static func hasAPIKey() -> Bool {
+    func hasAPIKey() -> Bool {
         getAPIKey() != nil
     }
 }

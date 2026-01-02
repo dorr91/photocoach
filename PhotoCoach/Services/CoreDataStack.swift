@@ -1,12 +1,12 @@
 import CoreData
 import SwiftUI
 
-class CoreDataStack: ObservableObject {
-    static let shared = CoreDataStack()
-
+class CoreDataStack: ObservableObject, CoreDataStackProtocol {
     let container: NSPersistentContainer
+    private let photoStorage: PhotoStorageProtocol
 
-    init(inMemory: Bool = false) {
+    init(inMemory: Bool = false, photoStorage: PhotoStorageProtocol) {
+        self.photoStorage = photoStorage
         container = NSPersistentContainer(name: "PhotoCoach")
 
         if inMemory {
@@ -64,7 +64,7 @@ class CoreDataStack: ObservableObject {
 
     func deletePhoto(_ photo: Photo) {
         if let imagePath = photo.imagePath, let thumbnailPath = photo.thumbnailPath {
-            PhotoStorage.deletePhoto(imagePath: imagePath, thumbnailPath: thumbnailPath)
+            photoStorage.deletePhoto(imagePath: imagePath, thumbnailPath: thumbnailPath)
         }
         viewContext.delete(photo)
         save()

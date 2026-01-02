@@ -7,6 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B369D6FC2F07279F0081AAC7 /* FileManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369D6F42F07279F0081AAC7 /* FileManagerProtocol.swift */; };
+		B369D6FD2F07279F0081AAC7 /* PhotoStorageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369D6F72F07279F0081AAC7 /* PhotoStorageProtocol.swift */; };
+		B369D6FE2F07279F0081AAC7 /* OpenAIServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369D6F62F07279F0081AAC7 /* OpenAIServiceProtocol.swift */; };
+		B369D6FF2F07279F0081AAC7 /* KeychainServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369D6F52F07279F0081AAC7 /* KeychainServiceProtocol.swift */; };
+		B369D7002F07279F0081AAC7 /* CoreDataStackProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369D6F32F07279F0081AAC7 /* CoreDataStackProtocol.swift */; };
+		B369D7012F07279F0081AAC7 /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369D6F92F07279F0081AAC7 /* URLSessionProtocol.swift */; };
+		B369D70B2F0727C10081AAC7 /* OpenAIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369D7042F0727C10081AAC7 /* OpenAIService.swift */; };
+		B369D70C2F0727C10081AAC7 /* ServiceContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369D7082F0727C10081AAC7 /* ServiceContainer.swift */; };
+		B369D70D2F0727C10081AAC7 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369D7032F0727C10081AAC7 /* KeychainService.swift */; };
+		B369D70F2F0727C10081AAC7 /* PhotoStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369D7062F0727C10081AAC7 /* PhotoStorageService.swift */; };
+		B369D7102F0727C10081AAC7 /* OpenAIServiceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369D7052F0727C10081AAC7 /* OpenAIServiceExtensions.swift */; };
+		B369D7122F072A4E0081AAC7 /* GridOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369D7112F072A4E0081AAC7 /* GridOverlay.swift */; };
+		B369D71A2F072BC10081AAC7 /* MockOpenAIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369D7162F072BC10081AAC7 /* MockOpenAIService.swift */; };
+		B369D71B2F072BC10081AAC7 /* MockCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369D7132F072BC10081AAC7 /* MockCoreDataStack.swift */; };
+		B369D71C2F072BC10081AAC7 /* MockPhotoStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369D7172F072BC10081AAC7 /* MockPhotoStorage.swift */; };
+		B369D71D2F072BC10081AAC7 /* MockURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369D7182F072BC10081AAC7 /* MockURLSession.swift */; };
+		B369D71E2F072BC10081AAC7 /* MockFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369D7142F072BC10081AAC7 /* MockFileManager.swift */; };
+		B369D71F2F072BC10081AAC7 /* MockKeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369D7152F072BC10081AAC7 /* MockKeychainService.swift */; };
+		B369D7242F072BCE0081AAC7 /* TestDataBuilders.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369D7212F072BCE0081AAC7 /* TestDataBuilders.swift */; };
+		B369D7252F072BCE0081AAC7 /* AsyncTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369D7202F072BCE0081AAC7 /* AsyncTestHelpers.swift */; };
+		B369D7262F072BCE0081AAC7 /* XCTestCase+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369D7222F072BCE0081AAC7 /* XCTestCase+Extensions.swift */; };
+		B369D72C2F072BD90081AAC7 /* FeedbackViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369D7282F072BD90081AAC7 /* FeedbackViewModelTests.swift */; };
+		B369D72D2F072BD90081AAC7 /* KeychainServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369D7292F072BD90081AAC7 /* KeychainServiceTests.swift */; };
+		B369D72E2F072BD90081AAC7 /* CoreDataStackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369D7272F072BD90081AAC7 /* CoreDataStackTests.swift */; };
+		B369D72F2F072BD90081AAC7 /* OpenAIServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369D72A2F072BD90081AAC7 /* OpenAIServiceTests.swift */; };
+		B369D7302F072BD90081AAC7 /* IsolatedBusinessLogicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B369D72F2F072BD90081AAC8 /* IsolatedBusinessLogicTests.swift */; };
 		B37349542EEF17CD00404689 /* PhotoCoachApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37349532EEF17CD00404689 /* PhotoCoachApp.swift */; };
 		B37349562EEF17CD00404689 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37349552EEF17CD00404689 /* ContentView.swift */; };
 		B37349582EEF17CF00404689 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B37349572EEF17CF00404689 /* Assets.xcassets */; };
@@ -14,15 +40,11 @@
 		B37349652EEF17CF00404689 /* PhotoCoachTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37349642EEF17CF00404689 /* PhotoCoachTests.swift */; };
 		B373496F2EEF17CF00404689 /* PhotoCoachUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B373496E2EEF17CF00404689 /* PhotoCoachUITests.swift */; };
 		B37349712EEF17CF00404689 /* PhotoCoachUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37349702EEF17CF00404689 /* PhotoCoachUITestsLaunchTests.swift */; };
-		B3B1FAEB2EF63D39000879EE /* GridOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B1FAEA2EF63D39000879EE /* GridOverlay.swift */; };
 		B3FA50432EEF35FB00C21624 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FA50422EEF35FB00C21624 /* AppDelegate.swift */; };
 		C1000001AAAA000000000001 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000002AAAA000000000001 /* CameraManager.swift */; };
 		C1000001AAAA000000000002 /* CameraPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000002AAAA000000000002 /* CameraPreview.swift */; };
 		C1000001AAAA000000000003 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000002AAAA000000000003 /* CameraView.swift */; };
 		C1000001AAAA000000000004 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000002AAAA000000000004 /* CoreDataStack.swift */; };
-		C1000001AAAA000000000005 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000002AAAA000000000005 /* KeychainHelper.swift */; };
-		C1000001AAAA000000000006 /* OpenAIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000002AAAA000000000006 /* OpenAIService.swift */; };
-		C1000001AAAA000000000007 /* PhotoStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000002AAAA000000000007 /* PhotoStorage.swift */; };
 		C1000001AAAA000000000008 /* FeedbackViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000002AAAA000000000008 /* FeedbackViewModel.swift */; };
 		C1000001AAAA000000000009 /* PhotoCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000002AAAA000000000009 /* PhotoCard.swift */; };
 		C1000001AAAA000000000010 /* PhotoReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000002AAAA000000000010 /* PhotoReviewView.swift */; };
@@ -48,6 +70,33 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B322A0792F07357900929C92 /* PhotoCoach.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = PhotoCoach.xctestplan; sourceTree = "<group>"; };
+		B369D6F32F07279F0081AAC7 /* CoreDataStackProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStackProtocol.swift; sourceTree = "<group>"; };
+		B369D6F42F07279F0081AAC7 /* FileManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerProtocol.swift; sourceTree = "<group>"; };
+		B369D6F52F07279F0081AAC7 /* KeychainServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainServiceProtocol.swift; sourceTree = "<group>"; };
+		B369D6F62F07279F0081AAC7 /* OpenAIServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIServiceProtocol.swift; sourceTree = "<group>"; };
+		B369D6F72F07279F0081AAC7 /* PhotoStorageProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoStorageProtocol.swift; sourceTree = "<group>"; };
+		B369D6F92F07279F0081AAC7 /* URLSessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
+		B369D7032F0727C10081AAC7 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
+		B369D7042F0727C10081AAC7 /* OpenAIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIService.swift; sourceTree = "<group>"; };
+		B369D7052F0727C10081AAC7 /* OpenAIServiceExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIServiceExtensions.swift; sourceTree = "<group>"; };
+		B369D7062F0727C10081AAC7 /* PhotoStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoStorageService.swift; sourceTree = "<group>"; };
+		B369D7082F0727C10081AAC7 /* ServiceContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceContainer.swift; sourceTree = "<group>"; };
+		B369D7112F072A4E0081AAC7 /* GridOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridOverlay.swift; sourceTree = "<group>"; };
+		B369D7132F072BC10081AAC7 /* MockCoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCoreDataStack.swift; sourceTree = "<group>"; };
+		B369D7142F072BC10081AAC7 /* MockFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFileManager.swift; sourceTree = "<group>"; };
+		B369D7152F072BC10081AAC7 /* MockKeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockKeychainService.swift; sourceTree = "<group>"; };
+		B369D7162F072BC10081AAC7 /* MockOpenAIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockOpenAIService.swift; sourceTree = "<group>"; };
+		B369D7172F072BC10081AAC7 /* MockPhotoStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPhotoStorage.swift; sourceTree = "<group>"; };
+		B369D7182F072BC10081AAC7 /* MockURLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSession.swift; sourceTree = "<group>"; };
+		B369D7202F072BCE0081AAC7 /* AsyncTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncTestHelpers.swift; sourceTree = "<group>"; };
+		B369D7212F072BCE0081AAC7 /* TestDataBuilders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDataBuilders.swift; sourceTree = "<group>"; };
+		B369D7222F072BCE0081AAC7 /* XCTestCase+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Extensions.swift"; sourceTree = "<group>"; };
+		B369D7272F072BD90081AAC7 /* CoreDataStackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStackTests.swift; sourceTree = "<group>"; };
+		B369D7282F072BD90081AAC7 /* FeedbackViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewModelTests.swift; sourceTree = "<group>"; };
+		B369D7292F072BD90081AAC7 /* KeychainServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainServiceTests.swift; sourceTree = "<group>"; };
+		B369D72A2F072BD90081AAC7 /* OpenAIServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIServiceTests.swift; sourceTree = "<group>"; };
+		B369D72F2F072BD90081AAC8 /* IsolatedBusinessLogicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsolatedBusinessLogicTests.swift; sourceTree = "<group>"; };
 		B37349502EEF17CD00404689 /* PhotoCoach.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoCoach.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B37349532EEF17CD00404689 /* PhotoCoachApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCoachApp.swift; sourceTree = "<group>"; };
 		B37349552EEF17CD00404689 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -58,15 +107,11 @@
 		B373496A2EEF17CF00404689 /* PhotoCoachUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotoCoachUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B373496E2EEF17CF00404689 /* PhotoCoachUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCoachUITests.swift; sourceTree = "<group>"; };
 		B37349702EEF17CF00404689 /* PhotoCoachUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCoachUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		B3B1FAEA2EF63D39000879EE /* GridOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridOverlay.swift; sourceTree = "<group>"; };
-		B3FA50422EEF35FB00C21624 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = PhotoCoach/AppDelegate.swift; sourceTree = "<group>"; };
+		B3FA50422EEF35FB00C21624 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C1000002AAAA000000000001 /* CameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
 		C1000002AAAA000000000002 /* CameraPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreview.swift; sourceTree = "<group>"; };
 		C1000002AAAA000000000003 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		C1000002AAAA000000000004 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
-		C1000002AAAA000000000005 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
-		C1000002AAAA000000000006 /* OpenAIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIService.swift; sourceTree = "<group>"; };
-		C1000002AAAA000000000007 /* PhotoStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoStorage.swift; sourceTree = "<group>"; };
 		C1000002AAAA000000000008 /* FeedbackViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewModel.swift; sourceTree = "<group>"; };
 		C1000002AAAA000000000009 /* PhotoCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCard.swift; sourceTree = "<group>"; };
 		C1000002AAAA000000000010 /* PhotoReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoReviewView.swift; sourceTree = "<group>"; };
@@ -100,14 +145,69 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B322A07A2F07389300929C92 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B369D6FA2F07279F0081AAC7 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				B369D6F32F07279F0081AAC7 /* CoreDataStackProtocol.swift */,
+				B369D6F42F07279F0081AAC7 /* FileManagerProtocol.swift */,
+				B369D6F52F07279F0081AAC7 /* KeychainServiceProtocol.swift */,
+				B369D6F62F07279F0081AAC7 /* OpenAIServiceProtocol.swift */,
+				B369D6F72F07279F0081AAC7 /* PhotoStorageProtocol.swift */,
+				B369D6F92F07279F0081AAC7 /* URLSessionProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		B369D7192F072BC10081AAC7 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				B369D7132F072BC10081AAC7 /* MockCoreDataStack.swift */,
+				B369D7142F072BC10081AAC7 /* MockFileManager.swift */,
+				B369D7152F072BC10081AAC7 /* MockKeychainService.swift */,
+				B369D7162F072BC10081AAC7 /* MockOpenAIService.swift */,
+				B369D7172F072BC10081AAC7 /* MockPhotoStorage.swift */,
+				B369D7182F072BC10081AAC7 /* MockURLSession.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		B369D7232F072BCE0081AAC7 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				B369D7202F072BCE0081AAC7 /* AsyncTestHelpers.swift */,
+				B369D7212F072BCE0081AAC7 /* TestDataBuilders.swift */,
+				B369D7222F072BCE0081AAC7 /* XCTestCase+Extensions.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		B369D72B2F072BD90081AAC7 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				B369D7272F072BD90081AAC7 /* CoreDataStackTests.swift */,
+				B369D7282F072BD90081AAC7 /* FeedbackViewModelTests.swift */,
+				B369D72F2F072BD90081AAC8 /* IsolatedBusinessLogicTests.swift */,
+				B369D7292F072BD90081AAC7 /* KeychainServiceTests.swift */,
+				B369D72A2F072BD90081AAC7 /* OpenAIServiceTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
 		B37349472EEF17CD00404689 = {
 			isa = PBXGroup;
 			children = (
-				B3B1FAEA2EF63D39000879EE /* GridOverlay.swift */,
-				B3FA50422EEF35FB00C21624 /* AppDelegate.swift */,
+				B322A0792F07357900929C92 /* PhotoCoach.xctestplan */,
 				B37349522EEF17CD00404689 /* PhotoCoach */,
 				B37349632EEF17CF00404689 /* PhotoCoachTests */,
 				B373496D2EEF17CF00404689 /* PhotoCoachUITests */,
+				B322A07A2F07389300929C92 /* Frameworks */,
 				B37349512EEF17CD00404689 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -135,6 +235,8 @@
 				B37349572EEF17CF00404689 /* Assets.xcassets */,
 				C1000002AAAA000000000013 /* Info.plist */,
 				B37349592EEF17CF00404689 /* Preview Content */,
+				B369D6FA2F07279F0081AAC7 /* Protocols */,
+				B3FA50422EEF35FB00C21624 /* AppDelegate.swift */,
 			);
 			path = PhotoCoach;
 			sourceTree = "<group>";
@@ -150,6 +252,9 @@
 		B37349632EEF17CF00404689 /* PhotoCoachTests */ = {
 			isa = PBXGroup;
 			children = (
+				B369D72B2F072BD90081AAC7 /* Tests */,
+				B369D7232F072BCE0081AAC7 /* Helpers */,
+				B369D7192F072BC10081AAC7 /* Mocks */,
 				B37349642EEF17CF00404689 /* PhotoCoachTests.swift */,
 			);
 			path = PhotoCoachTests;
@@ -167,6 +272,7 @@
 		C1000003AAAA000000000001 /* Camera */ = {
 			isa = PBXGroup;
 			children = (
+				B369D7112F072A4E0081AAC7 /* GridOverlay.swift */,
 				C1000002AAAA000000000001 /* CameraManager.swift */,
 				C1000002AAAA000000000002 /* CameraPreview.swift */,
 				C1000002AAAA000000000003 /* CameraView.swift */,
@@ -178,9 +284,11 @@
 			isa = PBXGroup;
 			children = (
 				C1000002AAAA000000000004 /* CoreDataStack.swift */,
-				C1000002AAAA000000000005 /* KeychainHelper.swift */,
-				C1000002AAAA000000000006 /* OpenAIService.swift */,
-				C1000002AAAA000000000007 /* PhotoStorage.swift */,
+				B369D7032F0727C10081AAC7 /* KeychainService.swift */,
+				B369D7042F0727C10081AAC7 /* OpenAIService.swift */,
+				B369D7052F0727C10081AAC7 /* OpenAIServiceExtensions.swift */,
+				B369D7062F0727C10081AAC7 /* PhotoStorageService.swift */,
+				B369D7082F0727C10081AAC7 /* ServiceContainer.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -345,15 +453,23 @@
 				B37349542EEF17CD00404689 /* PhotoCoachApp.swift in Sources */,
 				C1000001AAAA000000000001 /* CameraManager.swift in Sources */,
 				B3FA50432EEF35FB00C21624 /* AppDelegate.swift in Sources */,
-				B3B1FAEB2EF63D39000879EE /* GridOverlay.swift in Sources */,
 				C1000001AAAA000000000002 /* CameraPreview.swift in Sources */,
 				C1000001AAAA000000000003 /* CameraView.swift in Sources */,
 				C1000001AAAA000000000004 /* CoreDataStack.swift in Sources */,
-				C1000001AAAA000000000005 /* KeychainHelper.swift in Sources */,
-				C1000001AAAA000000000006 /* OpenAIService.swift in Sources */,
-				C1000001AAAA000000000007 /* PhotoStorage.swift in Sources */,
 				C1000001AAAA000000000008 /* FeedbackViewModel.swift in Sources */,
 				C1000001AAAA000000000009 /* PhotoCard.swift in Sources */,
+				B369D6FC2F07279F0081AAC7 /* FileManagerProtocol.swift in Sources */,
+				B369D6FD2F07279F0081AAC7 /* PhotoStorageProtocol.swift in Sources */,
+				B369D6FE2F07279F0081AAC7 /* OpenAIServiceProtocol.swift in Sources */,
+				B369D6FF2F07279F0081AAC7 /* KeychainServiceProtocol.swift in Sources */,
+				B369D7002F07279F0081AAC7 /* CoreDataStackProtocol.swift in Sources */,
+				B369D7012F07279F0081AAC7 /* URLSessionProtocol.swift in Sources */,
+				B369D70B2F0727C10081AAC7 /* OpenAIService.swift in Sources */,
+				B369D70C2F0727C10081AAC7 /* ServiceContainer.swift in Sources */,
+				B369D70D2F0727C10081AAC7 /* KeychainService.swift in Sources */,
+				B369D70F2F0727C10081AAC7 /* PhotoStorageService.swift in Sources */,
+				B369D7102F0727C10081AAC7 /* OpenAIServiceExtensions.swift in Sources */,
+				B369D7122F072A4E0081AAC7 /* GridOverlay.swift in Sources */,
 				C1000001AAAA000000000010 /* PhotoReviewView.swift in Sources */,
 				C1000001AAAA000000000011 /* SettingsView.swift in Sources */,
 				C1000001AAAA000000000012 /* PhotoCoach.xcdatamodeld in Sources */,
@@ -364,7 +480,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B369D71A2F072BC10081AAC7 /* MockOpenAIService.swift in Sources */,
+				B369D71B2F072BC10081AAC7 /* MockCoreDataStack.swift in Sources */,
+				B369D71C2F072BC10081AAC7 /* MockPhotoStorage.swift in Sources */,
+				B369D71D2F072BC10081AAC7 /* MockURLSession.swift in Sources */,
+				B369D71E2F072BC10081AAC7 /* MockFileManager.swift in Sources */,
+				B369D71F2F072BC10081AAC7 /* MockKeychainService.swift in Sources */,
 				B37349652EEF17CF00404689 /* PhotoCoachTests.swift in Sources */,
+				B369D7242F072BCE0081AAC7 /* TestDataBuilders.swift in Sources */,
+				B369D7252F072BCE0081AAC7 /* AsyncTestHelpers.swift in Sources */,
+				B369D7262F072BCE0081AAC7 /* XCTestCase+Extensions.swift in Sources */,
+				B369D72C2F072BD90081AAC7 /* FeedbackViewModelTests.swift in Sources */,
+				B369D72D2F072BD90081AAC7 /* KeychainServiceTests.swift in Sources */,
+				B369D72E2F072BD90081AAC7 /* CoreDataStackTests.swift in Sources */,
+				B369D7302F072BD90081AAC7 /* IsolatedBusinessLogicTests.swift in Sources */,
+				B369D72F2F072BD90081AAC7 /* OpenAIServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -519,6 +649,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"PhotoCoach/Preview Content\"";
 				DEVELOPMENT_TEAM = 55T5F4SJCK;
 				ENABLE_PREVIEWS = YES;
@@ -550,6 +681,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"PhotoCoach/Preview Content\"";
 				DEVELOPMENT_TEAM = 55T5F4SJCK;
 				ENABLE_PREVIEWS = YES;
@@ -578,18 +710,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 55T5F4SJCK;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited) $(BUILT_PRODUCTS_DIR)";
 				GENERATE_INFOPLIST_FILE = YES;
+				SWIFT_INCLUDE_PATHS = "$(BUILT_PRODUCTS_DIR)";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = DaveDev.PhotoCoachTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PhotoCoach.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PhotoCoach";
 			};
 			name = Debug;
 		};
@@ -597,18 +731,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 55T5F4SJCK;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited) $(BUILT_PRODUCTS_DIR)";
 				GENERATE_INFOPLIST_FILE = YES;
+				SWIFT_INCLUDE_PATHS = "$(BUILT_PRODUCTS_DIR)";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = DaveDev.PhotoCoachTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PhotoCoach.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PhotoCoach";
 			};
 			name = Release;
 		};

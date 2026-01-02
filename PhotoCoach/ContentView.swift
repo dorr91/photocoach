@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var container: ServiceContainer
     @EnvironmentObject var coreData: CoreDataStack
     @State private var navigateToReview = false
     @State private var showSettings = false
@@ -19,6 +20,8 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
-        .environmentObject(CoreDataStack.shared)
+    let container = ServiceContainer(inMemory: true)
+    return ContentView()
+        .environmentObject(container)
+        .environmentObject(container.coreDataStack as! CoreDataStack)
 }

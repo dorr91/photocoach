@@ -2,6 +2,7 @@ import SwiftUI
 
 struct CameraView: View {
     @StateObject private var cameraManager = CameraManager()
+    @EnvironmentObject var container: ServiceContainer
     @EnvironmentObject var coreData: CoreDataStack
     @Binding var navigateToReview: Bool
     @Binding var showSettings: Bool
@@ -176,12 +177,12 @@ struct CameraView: View {
 
         if let image = await cameraManager.capturePhoto() {
             // Save photo
-            if let paths = PhotoStorage.savePhoto(image, id: UUID()) {
+            if let paths = container.photoStorage.savePhoto(image, id: UUID()) {
                 let photo = coreData.createPhoto(imagePath: paths.imagePath, thumbnailPath: paths.thumbnailPath)
                 _ = coreData.createFeedback(for: photo)
 
                 // Update thumbnail
-                lastThumbnail = PhotoStorage.loadThumbnail(path: paths.thumbnailPath)
+                lastThumbnail = container.photoStorage.loadThumbnail(path: paths.thumbnailPath)
 
                 // Navigate to review
                 navigateToReview = true
@@ -196,12 +197,12 @@ struct CameraView: View {
     private func loadLastThumbnail() {
         let photos = coreData.fetchPhotos()
         if let lastPhoto = photos.first, let thumbPath = lastPhoto.thumbnailPath {
-            lastThumbnail = PhotoStorage.loadThumbnail(path: thumbPath)
+            lastThumbnail = container.photoStorage.loadThumbnail(path: thumbPath)
         }
     }
 }
 
 #Preview {
     CameraView(navigateToReview: .constant(false), showSettings: .constant(false))
-        .environmentObject(CoreDataStack(inMemory: true))
+        .environmentObject(CoreDataStack(inMemory: true, photoStorage: PhotoStorageService()))
 }

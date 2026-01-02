@@ -33,36 +33,87 @@ An AI-powered photo coaching app for iOS. Take a photo → get instant feedback 
 
 ## Project Structure
 
+### Framework-Based Architecture
+
+PhotoCoach now uses a **Swift Package** (PhotoCoachCore) to extract business logic, enabling fast unit tests without simulator overhead:
+
 ```
 PhotoCoach/
-├── PhotoCoachApp.swift          # App entry point, injects CoreDataStack
-├── AppDelegate.swift            # UIApplicationDelegate for orientation control
-├── ContentView.swift            # Navigation container (NavigationStack)
+├── PhotoCoachCore/              # 🆕 Swift Package (business logic)
+│   ├── Package.swift           # Package manifest
+│   ├── Sources/PhotoCoachCore/
+│   │   ├── Models/
+│   │   │   ├── CoreDataEntities.swift
+│   │   │   └── PhotoCoach.xcdatamodeld     # Core Data model
+│   │   ├── Protocols/           # Protocol abstractions
+│   │   │   ├── CoreDataStackProtocol.swift
+│   │   │   ├── KeychainServiceProtocol.swift
+│   │   │   ├── PhotoStorageProtocol.swift
+│   │   │   ├── OpenAIServiceProtocol.swift
+│   │   │   ├── URLSessionProtocol.swift
+│   │   │   └── FileManagerProtocol.swift
+│   │   ├── Services/            # Testable business logic
+│   │   │   ├── KeychainService.swift
+│   │   │   ├── PhotoStorageService.swift
+│   │   │   ├── SimpleCoreDataStack.swift
+│   │   │   ├── MockOpenAIService.swift
+│   │   │   └── ServiceContainer.swift     # DI container
+│   │   └── ViewModels/          # (Temporarily disabled)
+│   └── Tests/PhotoCoachCoreTests/
+│       └── BasicPackageTests.swift       # Fast unit tests (~0.07s)
 │
-├── Camera/                      # Camera feature
-│   ├── CameraManager.swift      # AVFoundation logic (ObservableObject)
-│   ├── CameraPreview.swift      # UIViewRepresentable bridge
-│   └── CameraView.swift         # Camera UI (shutter, thumbnail, settings)
+├── PhotoCoach/                  # 🔄 iOS App (UI + integration)
+│   ├── PhotoCoachApp.swift      # App entry point, uses ServiceContainer
+│   ├── ContentView.swift        # Navigation container
+│   ├── Camera/                  # Camera feature
+│   │   ├── CameraManager.swift
+│   │   ├── CameraPreview.swift
+│   │   └── CameraView.swift
+│   ├── Views/                   # SwiftUI screens
+│   │   ├── PhotoReviewView.swift
+│   │   ├── PhotoCard.swift
+│   │   └── SettingsView.swift
+│   ├── ViewModels/
+│   │   └── FeedbackViewModel.swift
+│   └── Services/                # Legacy services (being migrated)
+│       ├── CoreDataStack.swift
+│       ├── OpenAIService.swift
+│       └── ServiceContainer.swift
 │
-├── Views/                       # Main screens
-│   ├── PhotoReviewView.swift    # Scrollable list of photos
-│   ├── PhotoCard.swift          # Single photo + AI feedback display
-│   └── SettingsView.swift       # API key management
-│
-├── ViewModels/
-│   └── FeedbackViewModel.swift  # Manages streaming feedback state
-│
-├── Services/                    # Business logic
-│   ├── CoreDataStack.swift      # Core Data setup + CRUD operations
-│   ├── PhotoStorage.swift       # File system for images/thumbnails
-│   ├── KeychainHelper.swift     # Secure API key storage
-│   └── OpenAIService.swift      # GPT-4 Vision API client
-│
-├── Models/
-│   └── PhotoCoach.xcdatamodeld  # Core Data model (Photo, AIFeedback)
-│
-└── Info.plist                   # Camera permission description
+└── PhotoCoachTests/             # Integration tests (~30s)
+    ├── Tests/
+    ├── Mocks/
+    └── Helpers/
 ```
+
+### Key Architectural Benefits
+
+1. **Fast Testing**: Business logic tests run in 0.07s vs 2-5+ minutes
+2. **Platform Abstraction**: Uses `PlatformImage` typealias for UIKit/AppKit compatibility  
+3. **Dependency Injection**: `ServiceContainer` provides clean testing boundaries
+4. **Protocol-Based Design**: All services implement testable protocols
+5. **Modular Code**: Business logic separate from UI concerns
+
+### Testing Strategy
+
+#### Fast Unit Tests (PhotoCoachCore Package)
+```bash
+cd PhotoCoachCore && swift test
+```
+- **Execution Time**: ~0.07 seconds (100x faster than before)
+- **No Simulator**: Pure Swift package tests
+- **Real Logic**: Tests actual KeychainService, PhotoStorageService, etc.
+- **Coverage**: Protocol conformance, business logic, error handling
+
+#### Integration Tests (Xcode Target)
+```bash
+xcodebuild test -scheme PhotoCoach
+```
+- **Execution Time**: ~30 seconds (with simulator)
+- **Full Stack**: Tests complete app integration
+- **UI Testing**: Critical user flows only
+
+This dual approach enables rapid TDD cycles while maintaining comprehensive coverage.
 
 ## Key Components
 

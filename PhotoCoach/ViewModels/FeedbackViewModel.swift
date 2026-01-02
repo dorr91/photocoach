@@ -1,7 +1,7 @@
 import Foundation
 import SwiftUI
 
-enum FeedbackState {
+enum FeedbackState: Equatable {
     case idle
     case loading
     case streaming(String)
@@ -13,10 +13,14 @@ enum FeedbackState {
 class FeedbackViewModel: ObservableObject {
     @Published var state: FeedbackState = .idle
 
-    private let coreData: CoreDataStack
+    private let coreData: CoreDataStackProtocol
+    private let openAIService: OpenAIServiceType
+    private let photoStorage: PhotoStorageProtocol
 
-    init(coreData: CoreDataStack) {
+    init(coreData: CoreDataStackProtocol, openAIService: OpenAIServiceType, photoStorage: PhotoStorageProtocol) {
         self.coreData = coreData
+        self.openAIService = openAIService
+        self.photoStorage = photoStorage
     }
 
     var displayText: String {
@@ -70,7 +74,7 @@ class FeedbackViewModel: ObservableObject {
         }
 
         guard let imagePath = photo.imagePath,
-              let imageData = PhotoStorage.imageDataForAPI(path: imagePath) else {
+              let imageData = photoStorage.imageDataForAPI(path: imagePath, maxDimension: 1024) else {
             state = .error("Could not load photo.")
             return
         }
@@ -79,7 +83,7 @@ class FeedbackViewModel: ObservableObject {
         var accumulatedText = ""
 
         do {
-            let stream = await OpenAIService.shared.streamFeedback(imageData: imageData)
+            let stream = await openAIService.streamFeedback(imageData: imageData)
 
             for try await chunk in stream {
                 accumulatedText += chunk
@@ -101,5 +105,14 @@ class FeedbackViewModel: ObservableObject {
     func retry(for photo: Photo) async {
         state = .idle
         await fetchFeedback(for: photo)
+    }
+    
+    // Test-friendly aliases
+    func analyzePhoto(_ photo: Photo) async {
+        await fetchFeedback(for: photo)
+    }
+    
+    func resetState() {
+        state = .idle
     }
 }
