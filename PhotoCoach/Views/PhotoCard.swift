@@ -107,14 +107,15 @@ struct PhotoCard: View {
     private func loadImage() async {
         guard let imagePath = photo.imagePath else { return }
 
+        // Capture photoStorage before detaching to avoid actor isolation issues
+        let photoStorage = container.photoStorage
+
         // Load image off main thread
         let loadedImage = await Task.detached(priority: .userInitiated) {
-            self.container.photoStorage.loadImage(path: imagePath)
+            photoStorage.loadImage(path: imagePath)
         }.value
 
-        await MainActor.run {
-            self.image = loadedImage
-        }
+        image = loadedImage
     }
 }
 

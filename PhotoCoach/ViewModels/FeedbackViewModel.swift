@@ -80,9 +80,12 @@ class FeedbackViewModel: ObservableObject {
 
         state = .loading
 
+        // Capture photoStorage before detaching to avoid actor isolation issues
+        let storage = photoStorage
+
         // Load and resize image off main thread
         let imageData = await Task.detached(priority: .userInitiated) {
-            self.photoStorage.imageDataForAPI(path: imagePath, maxDimension: 1024)
+            storage.imageDataForAPI(path: imagePath, maxDimension: 1024)
         }.value
 
         guard let imageData else {
