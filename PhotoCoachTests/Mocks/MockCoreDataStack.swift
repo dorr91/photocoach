@@ -11,6 +11,7 @@ class MockCoreDataStack: CoreDataStackProtocol {
     var saveCallCount = 0
     var createPhotoCallCount = 0
     var fetchPhotosCallCount = 0
+    var fetchPhotoByIdCallCount = 0
     var deletePhotoCallCount = 0
     var createFeedbackCallCount = 0
     var updateFeedbackCallCount = 0
@@ -66,10 +67,10 @@ class MockCoreDataStack: CoreDataStackProtocol {
     
     func fetchPhotos() -> [Photo] {
         fetchPhotosCallCount += 1
-        
+
         let request: NSFetchRequest<Photo> = Photo.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(keyPath: \Photo.capturedAt, ascending: false)]
-        
+
         do {
             return try viewContext.fetch(request)
         } catch {
@@ -77,7 +78,22 @@ class MockCoreDataStack: CoreDataStackProtocol {
             return []
         }
     }
-    
+
+    func fetchPhoto(by id: UUID) -> Photo? {
+        fetchPhotoByIdCallCount += 1
+
+        let request: NSFetchRequest<Photo> = Photo.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+        request.fetchLimit = 1
+
+        do {
+            return try viewContext.fetch(request).first
+        } catch {
+            print("Failed to fetch photo: \(error)")
+            return nil
+        }
+    }
+
     func deletePhoto(_ photo: Photo) {
         deletePhotoCallCount += 1
         viewContext.delete(photo)
@@ -95,11 +111,14 @@ class MockCoreDataStack: CoreDataStackProtocol {
         return feedback
     }
     
-    func updateFeedback(_ feedback: AIFeedback, content: String, isComplete: Bool) {
+    func updateFeedback(_ feedback: AIFeedback, content: String, isComplete: Bool, responseId: String? = nil) {
         updateFeedbackCallCount += 1
-        
+
         feedback.content = content
         feedback.isComplete = isComplete
+        if let responseId = responseId {
+            feedback.responseId = responseId
+        }
     }
     
     func fetchFeedback(for photo: Photo) -> AIFeedback? {
@@ -138,6 +157,7 @@ class MockCoreDataStack: CoreDataStackProtocol {
         saveCallCount = 0
         createPhotoCallCount = 0
         fetchPhotosCallCount = 0
+        fetchPhotoByIdCallCount = 0
         deletePhotoCallCount = 0
         createFeedbackCallCount = 0
         updateFeedbackCallCount = 0

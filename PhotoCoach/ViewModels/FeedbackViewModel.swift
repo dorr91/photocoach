@@ -17,6 +17,9 @@ class FeedbackViewModel: ObservableObject {
     private let openAIService: OpenAIServiceType
     private let photoStorage: PhotoStorageProtocol
 
+    // Store the current photo's responseId for followups
+    private var currentResponseId: String?
+
     init(coreData: CoreDataStackProtocol, openAIService: OpenAIServiceType, photoStorage: PhotoStorageProtocol) {
         self.coreData = coreData
         self.openAIService = openAIService
@@ -56,11 +59,17 @@ class FeedbackViewModel: ObservableObject {
         return false
     }
 
+    var canAskFollowup: Bool {
+        currentResponseId != nil && isComplete
+    }
+
     func loadExistingFeedback(for photo: Photo) {
         if let feedback = coreData.fetchFeedback(for: photo),
            feedback.isComplete,
            let content = feedback.content, !content.isEmpty {
             state = .complete(content)
+            // Load the stored responseId for followups
+            currentResponseId = feedback.responseId
         }
     }
 
@@ -70,6 +79,7 @@ class FeedbackViewModel: ObservableObject {
            feedback.isComplete,
            let content = feedback.content, !content.isEmpty {
             state = .complete(content)
+            currentResponseId = feedback.responseId
             return
         }
 
@@ -92,17 +102,18 @@ class FeedbackViewModel: ObservableObject {
             state = .error("Could not load photo.")
             return
         }
+
         var accumulatedText = ""
         var lastUpdateTime = Date()
-        let updateInterval: TimeInterval = 0.1  // Update UI at most every 100ms
+        let updateInterval: TimeInterval = 0.1
 
         do {
-            let stream = await openAIService.streamFeedback(imageData: imageData)
+            // Pass nil for previousResponseId since this is initial feedback for this photo
+            let result = await openAIService.streamFeedback(imageData: imageData, previousResponseId: nil)
 
-            for try await chunk in stream {
+            for try await chunk in result.stream {
                 accumulatedText += chunk
 
-                // Debounce UI updates to prevent excessive re-renders
                 let now = Date()
                 if now.timeIntervalSince(lastUpdateTime) >= updateInterval {
                     state = .streaming(accumulatedText)
@@ -112,9 +123,13 @@ class FeedbackViewModel: ObservableObject {
 
             state = .complete(accumulatedText)
 
-            // Save to Core Data
+            // Get the responseId for future followups
+            let responseId = await result.responseId()
+            currentResponseId = responseId
+
+            // Save to Core Data with responseId
             if let feedback = coreData.fetchFeedback(for: photo) {
-                coreData.updateFeedback(feedback, content: accumulatedText, isComplete: true)
+                coreData.updateFeedback(feedback, content: accumulatedText, isComplete: true, responseId: responseId)
             }
         } catch {
             let errorMessage = (error as? OpenAIError)?.errorDescription ?? error.localizedDescription
@@ -124,15 +139,67 @@ class FeedbackViewModel: ObservableObject {
 
     func retry(for photo: Photo) async {
         state = .idle
+        currentResponseId = nil
         await fetchFeedback(for: photo)
     }
-    
+
+    func sendFollowup(question: String, for photo: Photo) async {
+        let trimmedQuestion = question.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmedQuestion.isEmpty else { return }
+
+        guard let previousResponseId = currentResponseId else {
+            state = .error("Cannot ask followup questions. Please wait for the initial analysis to complete.")
+            return
+        }
+
+        let currentText = displayText
+        let questionPrefix = "\n\n---\n\n**Your question:** \(trimmedQuestion)\n\n**Response:** "
+
+        state = .streaming(currentText + questionPrefix)
+
+        var accumulatedFollowupText = ""
+        var lastUpdateTime = Date()
+        let updateInterval: TimeInterval = 0.1
+
+        do {
+            let result = await openAIService.streamFollowup(question: trimmedQuestion, previousResponseId: previousResponseId)
+
+            for try await chunk in result.stream {
+                accumulatedFollowupText += chunk
+
+                let now = Date()
+                if now.timeIntervalSince(lastUpdateTime) >= updateInterval {
+                    state = .streaming(currentText + questionPrefix + accumulatedFollowupText)
+                    lastUpdateTime = now
+                }
+            }
+
+            let finalText = currentText + questionPrefix + accumulatedFollowupText
+            state = .complete(finalText)
+
+            // Update responseId for next followup
+            let newResponseId = await result.responseId()
+            if let newResponseId = newResponseId {
+                currentResponseId = newResponseId
+            }
+
+            // Update stored feedback with new content and responseId
+            if let feedback = coreData.fetchFeedback(for: photo) {
+                coreData.updateFeedback(feedback, content: finalText, isComplete: true, responseId: currentResponseId)
+            }
+        } catch {
+            let errorMessage = (error as? OpenAIError)?.errorDescription ?? error.localizedDescription
+            state = .error(errorMessage)
+        }
+    }
+
     // Test-friendly aliases
     func analyzePhoto(_ photo: Photo) async {
         await fetchFeedback(for: photo)
     }
-    
+
     func resetState() {
         state = .idle
+        currentResponseId = nil
     }
 }

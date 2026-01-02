@@ -3,17 +3,30 @@ import SwiftUI
 struct PhotoCard: View {
     let photo: Photo
     let container: ServiceContainer
+    let showSummaryOnly: Bool
     @StateObject private var feedbackVM: FeedbackViewModel
     @State private var image: UIImage?
 
-    init(photo: Photo, container: ServiceContainer) {
+    init(photo: Photo, container: ServiceContainer, showSummaryOnly: Bool = false) {
         self.photo = photo
         self.container = container
+        self.showSummaryOnly = showSummaryOnly
         self._feedbackVM = StateObject(wrappedValue: FeedbackViewModel(
             coreData: container.coreDataStack,
             openAIService: container.openAIService,
             photoStorage: container.photoStorage
         ))
+    }
+
+    private var summaryText: String {
+        let text = feedbackVM.displayText
+        guard showSummaryOnly, text.count > 150 else { return text }
+
+        let truncated = String(text.prefix(150))
+        if let lastSpace = truncated.lastIndex(of: " ") {
+            return String(truncated[..<lastSpace]) + "..."
+        }
+        return truncated + "..."
     }
 
     var body: some View {
@@ -58,6 +71,9 @@ struct PhotoCard: View {
                     if feedbackVM.isLoading || feedbackVM.isStreaming {
                         ProgressView()
                             .scaleEffect(0.8)
+                    } else if showSummaryOnly {
+                        Image(systemName: "chevron.right")
+                            .foregroundStyle(.secondary)
                     }
                 }
 
@@ -67,21 +83,26 @@ struct PhotoCard: View {
                             .foregroundStyle(.red)
                             .font(.subheadline)
 
-                        Button {
-                            Task {
-                                await feedbackVM.retry(for: photo)
+                        if !showSummaryOnly {
+                            Button {
+                                Task {
+                                    await feedbackVM.retry(for: photo)
+                                }
+                            } label: {
+                                Label("Retry", systemImage: "arrow.clockwise")
                             }
-                        } label: {
-                            Label("Retry", systemImage: "arrow.clockwise")
+                            .buttonStyle(.bordered)
                         }
-                        .buttonStyle(.bordered)
                     }
                 } else if feedbackVM.displayText.isEmpty && feedbackVM.isLoading {
                     Text("Analyzing your photo...")
                         .foregroundStyle(.secondary)
                         .font(.subheadline)
+                } else if showSummaryOnly {
+                    Text(summaryText)
+                        .font(.subheadline)
                 } else {
-                    Text(feedbackVM.displayText)
+                    Text(summaryText)
                         .font(.subheadline)
                         .textSelection(.enabled)
                 }
@@ -105,14 +126,19 @@ struct PhotoCard: View {
     }
 
     private func loadImage() async {
-        guard let imagePath = photo.imagePath else { return }
+        // Use thumbnail in summary mode for faster loading
+        let useThumbnail = showSummaryOnly
+        let path = useThumbnail ? photo.thumbnailPath : photo.imagePath
+        guard let imagePath = path else { return }
 
         // Capture photoStorage before detaching to avoid actor isolation issues
         let photoStorage = container.photoStorage
 
         // Load image off main thread
         let loadedImage = await Task.detached(priority: .userInitiated) {
-            photoStorage.loadImage(path: imagePath)
+            useThumbnail
+                ? photoStorage.loadThumbnail(path: imagePath)
+                : photoStorage.loadImage(path: imagePath)
         }.value
 
         image = loadedImage

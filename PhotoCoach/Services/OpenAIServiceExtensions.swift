@@ -8,8 +8,12 @@ class OpenAIServiceWrapper: OpenAIServiceType {
         self.service = service
     }
 
-    func streamFeedback(imageData: Data) async -> AsyncThrowingStream<String, Error> {
-        await service.streamFeedback(imageData: imageData)
+    func streamFeedback(imageData: Data, previousResponseId: String?) async -> StreamResult {
+        await service.streamFeedback(imageData: imageData, previousResponseId: previousResponseId)
+    }
+
+    func streamFollowup(question: String, previousResponseId: String) async -> StreamResult {
+        await service.streamFollowup(question: question, previousResponseId: previousResponseId)
     }
 
     func clearSession() async {

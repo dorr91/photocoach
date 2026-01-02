@@ -62,6 +62,19 @@ class CoreDataStack: ObservableObject, CoreDataStackProtocol {
         }
     }
 
+    func fetchPhoto(by id: UUID) -> Photo? {
+        let request: NSFetchRequest<Photo> = Photo.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+        request.fetchLimit = 1
+
+        do {
+            return try viewContext.fetch(request).first
+        } catch {
+            print("Error fetching photo: \(error)")
+            return nil
+        }
+    }
+
     func deletePhoto(_ photo: Photo) {
         if let imagePath = photo.imagePath, let thumbnailPath = photo.thumbnailPath {
             photoStorage.deletePhoto(imagePath: imagePath, thumbnailPath: thumbnailPath)
@@ -83,9 +96,12 @@ class CoreDataStack: ObservableObject, CoreDataStackProtocol {
         return feedback
     }
 
-    func updateFeedback(_ feedback: AIFeedback, content: String, isComplete: Bool) {
+    func updateFeedback(_ feedback: AIFeedback, content: String, isComplete: Bool, responseId: String? = nil) {
         feedback.content = content
         feedback.isComplete = isComplete
+        if let responseId = responseId {
+            feedback.responseId = responseId
+        }
         save()
     }
 
