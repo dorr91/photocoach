@@ -3,7 +3,6 @@
 ## Camera Features (Post-MVP)
 - **Front/back camera toggle** - Support selfie mode
 - **Flash control** - On/off/auto modes
-- **Grid overlay** - Rule of thirds guide
 
 ## Onboarding & UX
 - **First-launch onboarding flow** - Guide users through API key setup on first open

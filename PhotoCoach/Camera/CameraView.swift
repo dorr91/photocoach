@@ -1,4 +1,5 @@
 import SwiftUI
+import PhotosUI
 
 struct CameraView: View {
     @StateObject private var cameraManager = CameraManager()
@@ -9,6 +10,7 @@ struct CameraView: View {
 
     @State private var lastThumbnail: UIImage?
     @State private var showCaptureFlash = false
+    @State private var selectedPhotoItem: PhotosPickerItem?
     @AppStorage("showGrid") private var showGrid = false
 
     var body: some View {
@@ -121,12 +123,25 @@ struct CameraView: View {
 
                     Spacer()
 
-                    // Spacer for balance
-                    Color.clear
-                        .frame(width: 60, height: 60)
+                    // Photo library picker
+                    PhotosPicker(selection: $selectedPhotoItem, matching: .images) {
+                        RoundedRectangle(cornerRadius: 8)
+                            .fill(.ultraThinMaterial)
+                            .frame(width: 60, height: 60)
+                            .overlay(
+                                Image(systemName: "photo.on.rectangle")
+                                    .font(.title2)
+                                    .foregroundStyle(.white)
+                            )
+                    }
                 }
                 .padding(.horizontal, 30)
                 .padding(.bottom, 30)
+            }
+        }
+        .onChange(of: selectedPhotoItem) { _, newItem in
+            Task {
+                await handleSelectedPhoto(newItem)
             }
         }
         .task {
@@ -176,21 +191,36 @@ struct CameraView: View {
         }
 
         if let image = await cameraManager.capturePhoto() {
-            // Save photo
-            if let paths = container.photoStorage.savePhoto(image, id: UUID()) {
-                let photo = coreData.createPhoto(imagePath: paths.imagePath, thumbnailPath: paths.thumbnailPath)
-                _ = coreData.createFeedback(for: photo)
-
-                // Update thumbnail
-                lastThumbnail = container.photoStorage.loadThumbnail(path: paths.thumbnailPath)
-
-                // Navigate to review
-                navigateToReview = true
-            }
+            savePhotoAndNavigate(image)
         }
 
         withAnimation(.easeInOut(duration: 0.1)) {
             showCaptureFlash = false
+        }
+    }
+
+    private func handleSelectedPhoto(_ item: PhotosPickerItem?) async {
+        guard let item else { return }
+
+        if let data = try? await item.loadTransferable(type: Data.self),
+           let image = UIImage(data: data) {
+            savePhotoAndNavigate(image)
+        }
+
+        // Clear selection so user can pick the same photo again
+        selectedPhotoItem = nil
+    }
+
+    private func savePhotoAndNavigate(_ image: UIImage) {
+        if let paths = container.photoStorage.savePhoto(image, id: UUID()) {
+            let photo = coreData.createPhoto(imagePath: paths.imagePath, thumbnailPath: paths.thumbnailPath)
+            _ = coreData.createFeedback(for: photo)
+
+            // Update thumbnail
+            lastThumbnail = container.photoStorage.loadThumbnail(path: paths.thumbnailPath)
+
+            // Navigate to review
+            navigateToReview = true
         }
     }
 
