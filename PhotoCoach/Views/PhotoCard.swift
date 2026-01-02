@@ -94,7 +94,7 @@ struct PhotoCard: View {
         .padding()
         .background(Color(.systemBackground))
         .task {
-            loadImage()
+            await loadImage()
             feedbackVM.loadExistingFeedback(for: photo)
 
             // Auto-fetch if not complete
@@ -104,9 +104,16 @@ struct PhotoCard: View {
         }
     }
 
-    private func loadImage() {
-        if let imagePath = photo.imagePath {
-            image = container.photoStorage.loadImage(path: imagePath)
+    private func loadImage() async {
+        guard let imagePath = photo.imagePath else { return }
+
+        // Load image off main thread
+        let loadedImage = await Task.detached(priority: .userInitiated) {
+            self.container.photoStorage.loadImage(path: imagePath)
+        }.value
+
+        await MainActor.run {
+            self.image = loadedImage
         }
     }
 }
