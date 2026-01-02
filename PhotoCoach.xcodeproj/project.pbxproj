@@ -47,6 +47,7 @@
 		C1000001AAAA000000000004 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000002AAAA000000000004 /* CoreDataStack.swift */; };
 		C1000001AAAA000000000008 /* FeedbackViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000002AAAA000000000008 /* FeedbackViewModel.swift */; };
 		C1000001AAAA000000000009 /* PhotoCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000002AAAA000000000009 /* PhotoCard.swift */; };
+		C1000001AAAA000000000015 /* PhotoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000002AAAA000000000015 /* PhotoDetailView.swift */; };
 		C1000001AAAA000000000010 /* PhotoReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000002AAAA000000000010 /* PhotoReviewView.swift */; };
 		C1000001AAAA000000000011 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000002AAAA000000000011 /* SettingsView.swift */; };
 		C1000001AAAA000000000012 /* PhotoCoach.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C1000002AAAA000000000012 /* PhotoCoach.xcdatamodeld */; };
@@ -114,6 +115,7 @@
 		C1000002AAAA000000000004 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		C1000002AAAA000000000008 /* FeedbackViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewModel.swift; sourceTree = "<group>"; };
 		C1000002AAAA000000000009 /* PhotoCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCard.swift; sourceTree = "<group>"; };
+		C1000002AAAA000000000015 /* PhotoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailView.swift; sourceTree = "<group>"; };
 		C1000002AAAA000000000010 /* PhotoReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoReviewView.swift; sourceTree = "<group>"; };
 		C1000002AAAA000000000011 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		C1000002AAAA000000000013 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 			isa = PBXGroup;
 			children = (
 				C1000002AAAA000000000009 /* PhotoCard.swift */,
+				C1000002AAAA000000000015 /* PhotoDetailView.swift */,
 				C1000002AAAA000000000010 /* PhotoReviewView.swift */,
 				C1000002AAAA000000000011 /* SettingsView.swift */,
 			);
@@ -458,6 +461,7 @@
 				C1000001AAAA000000000004 /* CoreDataStack.swift in Sources */,
 				C1000001AAAA000000000008 /* FeedbackViewModel.swift in Sources */,
 				C1000001AAAA000000000009 /* PhotoCard.swift in Sources */,
+				C1000001AAAA000000000015 /* PhotoDetailView.swift in Sources */,
 				B369D6FC2F07279F0081AAC7 /* FileManagerProtocol.swift in Sources */,
 				B369D6FD2F07279F0081AAC7 /* PhotoStorageProtocol.swift in Sources */,
 				B369D6FE2F07279F0081AAC7 /* OpenAIServiceProtocol.swift in Sources */,

@@ -5,7 +5,8 @@ struct CameraView: View {
     @StateObject private var cameraManager = CameraManager()
     @EnvironmentObject var container: ServiceContainer
     @EnvironmentObject var coreData: CoreDataStack
-    @Binding var navigateToReview: Bool
+    @Binding var selectedPhotoId: UUID?
+    @Binding var showGallery: Bool
     @Binding var showSettings: Bool
 
     @State private var lastThumbnail: UIImage?
@@ -76,9 +77,9 @@ struct CameraView: View {
 
                 // Bottom controls
                 HStack(alignment: .center) {
-                    // Thumbnail to review
+                    // Thumbnail to gallery
                     Button {
-                        navigateToReview = true
+                        showGallery = true
                     } label: {
                         if let thumbnail = lastThumbnail {
                             Image(uiImage: thumbnail)
@@ -219,8 +220,8 @@ struct CameraView: View {
             // Update thumbnail
             lastThumbnail = container.photoStorage.loadThumbnail(path: paths.thumbnailPath)
 
-            // Navigate to review
-            navigateToReview = true
+            // Navigate to detail view for this photo
+            selectedPhotoId = photo.id
         }
     }
 
@@ -233,6 +234,6 @@ struct CameraView: View {
 }
 
 #Preview {
-    CameraView(navigateToReview: .constant(false), showSettings: .constant(false))
+    CameraView(selectedPhotoId: .constant(nil), showGallery: .constant(false), showSettings: .constant(false))
         .environmentObject(CoreDataStack(inMemory: true, photoStorage: PhotoStorageService()))
 }

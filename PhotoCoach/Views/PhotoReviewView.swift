@@ -4,6 +4,7 @@ struct PhotoReviewView: View {
     @EnvironmentObject var container: ServiceContainer
     @EnvironmentObject var coreData: CoreDataStack
     @State private var photos: [Photo] = []
+    var onSelectPhoto: ((Photo) -> Void)?
 
     var body: some View {
         Group {
@@ -13,7 +14,12 @@ struct PhotoReviewView: View {
                 ScrollView {
                     LazyVStack(spacing: 0) {
                         ForEach(photos, id: \.id) { photo in
-                            PhotoCard(photo: photo, container: container)
+                            Button {
+                                onSelectPhoto?(photo)
+                            } label: {
+                                PhotoCard(photo: photo, container: container, showSummaryOnly: true)
+                            }
+                            .buttonStyle(.plain)
                             Divider()
                         }
                     }
