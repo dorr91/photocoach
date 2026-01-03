@@ -120,20 +120,27 @@ class MockCoreDataStack: CoreDataStackProtocol {
     
     // Test helper methods
     func reset() {
-        let photoRequest: NSFetchRequest<NSFetchRequestResult> = Photo.fetchRequest()
-        let feedbackRequest: NSFetchRequest<NSFetchRequestResult> = AIFeedback.fetchRequest()
-        
-        let deletePhotoRequest = NSBatchDeleteRequest(fetchRequest: photoRequest)
-        let deleteFeedbackRequest = NSBatchDeleteRequest(fetchRequest: feedbackRequest)
-        
+        // NSBatchDeleteRequest doesn't work with in-memory stores
+        // Instead, delete objects one by one
+        let photoRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
+        let feedbackRequest: NSFetchRequest<AIFeedback> = AIFeedback.fetchRequest()
+
         do {
-            try viewContext.execute(deletePhotoRequest)
-            try viewContext.execute(deleteFeedbackRequest)
+            let photos = try viewContext.fetch(photoRequest)
+            for photo in photos {
+                viewContext.delete(photo)
+            }
+
+            let feedbacks = try viewContext.fetch(feedbackRequest)
+            for feedback in feedbacks {
+                viewContext.delete(feedback)
+            }
+
             try viewContext.save()
         } catch {
             print("Failed to reset mock data: \(error)")
         }
-        
+
         // Reset call counts
         saveCallCount = 0
         createPhotoCallCount = 0

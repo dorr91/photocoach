@@ -82,13 +82,17 @@ class MockPhotoStorage: PhotoStorageProtocol {
     
     func imageDataForAPI(path: String, maxDimension: CGFloat) -> Data? {
         imageDataForAPICallCount += 1
-        
-        guard let image = storage[path] else {
+
+        if shouldFailLoad {
             return nil
         }
-        
-        // Return simple JPEG data for testing
-        return image.jpegData(compressionQuality: 0.8)
+
+        guard storage[path] != nil else {
+            return nil
+        }
+
+        // Return mock JPEG data for testing (don't rely on real image conversion)
+        return Data.mockImageData(size: 1024)
     }
     
     // Test helper methods

@@ -177,13 +177,16 @@ final class CoreDataStackTests: XCTestCase {
     
     func test_save_whenSuccessful_shouldPersistChanges() {
         // Given
-        let photo = PhotoTestBuilder().build(in: context)
         let initialCount = coreDataStack.photoCount
-        
+        let photo = PhotoTestBuilder().build(in: context)
+
+        // Photo is now in context but unsaved
+        XCTAssertEqual(coreDataStack.photoCount, initialCount + 1, "Photo should be in context")
+
         // When
         coreDataStack.save()
-        
-        // Then
+
+        // Then - photo should still be there after save
         let finalCount = coreDataStack.photoCount
         XCTAssertEqual(finalCount, initialCount + 1, "Photo should be persisted after save")
         assertCallCount(coreDataStack.saveCallCount, equals: 1, for: "save")
