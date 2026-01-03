@@ -6,7 +6,7 @@ class KeychainService: KeychainServiceProtocol {
     private let account = "openai-api-key"
 
     func saveAPIKey(_ key: String) -> Bool {
-        guard let data = key.data(using: .utf8) else { return false }
+        guard !key.isEmpty, let data = key.data(using: .utf8) else { return false }
 
         // Delete existing item first
         deleteAPIKey()

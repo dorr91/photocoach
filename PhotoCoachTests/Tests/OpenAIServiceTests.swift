@@ -28,24 +28,22 @@ final class OpenAIServiceTests: XCTestCase {
     func test_streamFeedback_whenAPIKeyExists_shouldMakeNetworkRequest() async throws {
         // Given
         let testImageData = TestDataBuilder.createTestImageData()
-        let responseData = """
-        {"choices": [{"delta": {"content": "Test response"}}]}
-        """.data(using: .utf8)!
-        
+        let responseData = "data: {\"delta\":\"Test response\"}\n\ndata: [DONE]\n\n".data(using: .utf8)!
+
         // Mock the network response
         let httpResponse = HTTPURLResponse(
-            url: URL(string: "https://api.openai.com/v1/chat/completions")!,
+            url: URL(string: "https://api.openai.com/v1/responses")!,
             statusCode: 200,
             httpVersion: nil,
-            headerFields: ["Content-Type": "application/json"]
+            headerFields: ["Content-Type": "text/plain"]
         )!
-        
+
         mockURLSession.setMockResponse(data: responseData, response: httpResponse)
-        
+
         // When
         let stream = await openAIService.streamFeedback(imageData: testImageData)
         let results = try await collectStream(stream, timeout: 2.0)
-        
+
         // Then
         assertCalled(mockURLSession.bytesCallCount, for: "URLSession.bytes")
         assertCalled(mockKeychainService.getAPIKeyCallCount, for: "KeychainService.getAPIKey")
@@ -88,33 +86,41 @@ final class OpenAIServiceTests: XCTestCase {
             "This is a great",
             "This is a great photo"
         ]
-        
-        // Create mock streaming response data
+
+        // Create mock streaming response data using Responses API format (delta is a top-level string)
         let responseLines = streamResponses.map { response in
-            "data: {\"choices\":[{\"delta\":{\"content\":\"\(response)\"}}]}\n\n"
-        }.joined()
-        
+            "data: {\"delta\":\"\(response)\"}\n\n"
+        }.joined() + "data: [DONE]\n\n"
+
         let responseData = responseLines.data(using: .utf8)!
         let httpResponse = HTTPURLResponse(
-            url: URL(string: "https://api.openai.com/v1/chat/completions")!,
+            url: URL(string: "https://api.openai.com/v1/responses")!,
             statusCode: 200,
             httpVersion: nil,
             headerFields: ["Content-Type": "text/plain"]
         )!
-        
+
         // Set up mock response
         mockURLSession.setMockResponse(data: responseData, response: httpResponse)
-        
+
         // When
         let stream = await openAIService.streamFeedback(imageData: testImageData)
         let results = try await collectStream(stream, timeout: 2.0)
-        
+
         // Then
         XCTAssertFalse(results.isEmpty, "Should receive streaming responses")
-        XCTAssertEqual(results.count, streamResponses.count, "Should receive all streaming responses")
-        
-        // Verify the content is accumulated properly
+        XCTAssertEqual(
+            results.count,
+            streamResponses.count,
+            "Expected \(streamResponses.count) responses but got \(results.count). Actual results: \(results)"
+        )
+
+        // Verify the content is accumulated properly with bounds checking
         for (index, expectedResponse) in streamResponses.enumerated() {
+            guard index < results.count else {
+                XCTFail("Missing response at index \(index). Expected: \(expectedResponse). Only got \(results.count) results: \(results)")
+                continue
+            }
             XCTAssertEqual(results[index], expectedResponse, "Response \(index) should match expected content")
         }
     }
@@ -136,28 +142,28 @@ final class OpenAIServiceTests: XCTestCase {
         // Given
         let testImageData1 = TestDataBuilder.createTestImageData(size: 512)
         let testImageData2 = TestDataBuilder.createTestImageData(size: 1024)
-        
+
         let response1 = "First photo analysis"
         let response2 = "Second photo analysis"
-        
-        // Setup mock responses (simplified)
-        let responseData1 = "data: {\"choices\":[{\"delta\":{\"content\":\"\(response1)\"}}]}\n\n".data(using: .utf8)!
-        let responseData2 = "data: {\"choices\":[{\"delta\":{\"content\":\"\(response2)\"}}]}\n\n".data(using: .utf8)!
-        
+
+        // Setup mock responses using Responses API format
+        let responseData1 = "data: {\"delta\":\"\(response1)\"}\n\ndata: [DONE]\n\n".data(using: .utf8)!
+        let responseData2 = "data: {\"delta\":\"\(response2)\"}\n\ndata: [DONE]\n\n".data(using: .utf8)!
+
         let httpResponse = HTTPURLResponse(
-            url: URL(string: "https://api.openai.com/v1/chat/completions")!,
+            url: URL(string: "https://api.openai.com/v1/responses")!,
             statusCode: 200,
             httpVersion: nil,
             headerFields: ["Content-Type": "text/plain"]
         )!
-        
+
         // When & Then
         // First call
         mockURLSession.setMockResponse(data: responseData1, response: httpResponse)
         let stream1 = await openAIService.streamFeedback(imageData: testImageData1)
         let results1 = try await collectStream(stream1, timeout: 2.0)
         XCTAssertEqual(results1, [response1])
-        
+
         // Second call
         mockURLSession.reset()
         mockURLSession.setMockResponse(data: responseData2, response: httpResponse)
@@ -170,16 +176,16 @@ final class OpenAIServiceTests: XCTestCase {
     
     func test_streamFeedback_performance() {
         let testImageData = TestDataBuilder.createTestImageData()
-        let responseData = "data: {\"choices\":[{\"delta\":{\"content\":\"Fast response\"}}]}\n\n".data(using: .utf8)!
+        let responseData = "data: {\"delta\":\"Fast response\"}\n\ndata: [DONE]\n\n".data(using: .utf8)!
         let httpResponse = HTTPURLResponse(
-            url: URL(string: "https://api.openai.com/v1/chat/completions")!,
+            url: URL(string: "https://api.openai.com/v1/responses")!,
             statusCode: 200,
             httpVersion: nil,
             headerFields: ["Content-Type": "text/plain"]
         )!
-        
+
         mockURLSession.setMockResponse(data: responseData, response: httpResponse)
-        
+
         measureAsync {
             let stream = await self.openAIService.streamFeedback(imageData: testImageData)
             _ = try await self.collectStream(stream, timeout: 1.0)
